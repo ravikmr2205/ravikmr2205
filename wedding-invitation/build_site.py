@@ -19,5 +19,6 @@ for name in ("index.html", "classic.html"):
             + meta + '</head>\n<body>\n')
     (out / name).write_text(head + body + "\n</body>\n</html>\n", encoding="utf-8")
 shutil.copytree(src / "images", out / "images", dirs_exist_ok=True)
+shutil.copytree(src / "music", out / "music", dirs_exist_ok=True)
 (out / ".nojekyll").write_text("")
 print("Built", out / "index.html", "and", out / "classic.html")
