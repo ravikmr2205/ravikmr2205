@@ -75,8 +75,8 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
 .cover { --bg: radial-gradient(120% 90% at 50% 0%, #fffaf0 0%, #f6ead2 60%, #efdcb8 100%); --t1:#e9a21a; --t2:#c0392b; }
 .ganesh { font-family: var(--deva); color: var(--maroon); font-size: 1.05rem; }
 .names { display: grid; gap: .35rem; justify-items: center; }
-.names .n { font-family: var(--display); color: var(--maroon); font-size: clamp(3rem, 13vw, 5.6rem); line-height: 1; }
-.names .amp { font-family: var(--display); color: var(--gold); font-size: clamp(2rem, 7vw, 3rem); line-height: 1; }
+.names .n { font-family: var(--display); color: var(--maroon); font-size: clamp(2.3rem, 10vw, 3.6rem); line-height: 1.05; }
+.names .amp { font-family: var(--display); color: var(--gold); font-size: clamp(1.5rem, 5vw, 2.2rem); line-height: 1; }
 .parents { font-size: .98rem; color: #5b4636; margin: 0; }
 .parents b { font-weight: 600; color: var(--ink); }
 .cover-dates { font-family: var(--caps); letter-spacing: .18em; color: var(--maroon); font-size: 1rem; }
@@ -242,7 +242,7 @@ html.gate-on, html.gate-on body { overflow: hidden; }
 .side .swatches { justify-content: flex-start; }
 /* Background music */
 .music-btn { position: fixed; z-index: 30; left: calc(env(safe-area-inset-left, 0px) + 14px); bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
-  width: 44px; height: 44px; border-radius: 50%; border: 1px solid #b8862b; background: #fffaf0; color: #6e0f1d; display: grid; place-items: center; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.18); }
+  width: 44px; height: 44px; border-radius: 50%; border: 1px solid #b8862b; background: #fffaf0; color: var(--maroon); display: grid; place-items: center; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.18); }
 .music-btn svg { width: 20px; height: 20px; fill: currentColor; }
 .music-btn .off { display: none; }
 .music-btn[aria-pressed="false"] .on { display: none; }
@@ -258,8 +258,8 @@ html.gate-on, html.gate-on body { overflow: hidden; }
 .cover .divider, .closing .divider, .invite .divider { color: #b8862b; }
 .mandala-bg { position: absolute; z-index: 0; pointer-events: none; color: var(--accent); opacity: .08; width: min(120vmin, 60rem); height: auto; aspect-ratio: 1; left: 50%; top: 50%; translate: -50% -50%; animation: spin 160s linear infinite; }
 @keyframes spin { to { rotate: 360deg; } }
-.portrait { position: relative; display: grid; place-items: center; width: min(17rem, 66vw); margin-block: .6rem; }
-.portrait .halo { position: absolute; width: 122%; height: auto; aspect-ratio: 1; color: #c9a04a; opacity: .55; animation: spin 90s linear infinite; }
+.portrait { position: relative; display: grid; place-items: center; width: min(14rem, 56vw); margin-block: .4rem; }
+.portrait .halo { position: absolute; width: 118%; height: auto; aspect-ratio: 1; color: #c9a04a; opacity: .55; animation: spin 90s linear infinite; }
 .arch.couple { position: relative; z-index: 1; width: 100%; aspect-ratio: 900 / 818; border-radius: 999px 999px 14px 14px; box-shadow: 0 0 0 6px #fffaf0, 0 0 0 7px #d9bb7a, 0 24px 50px -18px rgba(110,15,29,.45); }
 .arch.couple img { object-position: 50% 0; }
 .names .n { background: linear-gradient(100deg, var(--maroon) 0 42%, #e2b65a 50%, var(--maroon) 58% 100%); background-size: 260% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 7s ease-in-out 2s infinite; }
@@ -305,6 +305,41 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
 
 .hashtag { font-family: var(--body); font-weight: 600; letter-spacing: .04em; font-size: 1.05rem; color: #b8862b; padding: .25rem .9rem; border: 1px solid rgba(184,134,43,.45); border-radius: 999px; }
 .hashtag-note { margin: 0; font-size: .85rem; font-style: italic; color: #7a6450; }
+
+/* Side palettes: groom = royal blue & gold, bride = rani pink & gold */
+body.side-groom { --maroon: #1f3f7a; }
+body.side-bride { --maroon: #a3174f; }
+body.side-groom .cover, body.side-groom .rsvp { --bg: radial-gradient(120% 90% at 50% 0%, #f8faff 0%, #e8eef9 60%, #d8e2f3 100%); }
+body.side-groom .invite, body.side-groom .venues { --bg: #f6f8fd; }
+body.side-groom .closing { --bg: radial-gradient(120% 90% at 50% 100%, #d8e2f3 0%, #e8eef9 45%, #f8faff 100%); }
+body.side-groom .count { --bg: linear-gradient(160deg, #0c1a3d 0%, #1f3f7a 55%, #2c5597 100%); }
+body.side-bride .cover, body.side-bride .rsvp { --bg: radial-gradient(120% 90% at 50% 0%, #fff8fa 0%, #fbe6ed 60%, #f5d0dd 100%); }
+body.side-bride .invite, body.side-bride .venues { --bg: #fff7f9; }
+body.side-bride .closing { --bg: radial-gradient(120% 90% at 50% 100%, #f5d0dd 0%, #fbe6ed 45%, #fff8fa 100%); }
+body.side-bride .count { --bg: linear-gradient(160deg, #3d0820 0%, #8e1446 55%, #b3245e 100%); }
+body.side-groom .arch.couple { box-shadow: 0 0 0 6px #f8faff, 0 0 0 7px #d9bb7a, 0 24px 50px -18px rgba(31,63,122,.45); }
+body.side-bride .arch.couple { box-shadow: 0 0 0 6px #fff8fa, 0 0 0 7px #d9bb7a, 0 24px 50px -18px rgba(163,23,79,.4); }
+
+/* Realistic diyas: clay bowl with oil and spout, layered flame, warm glow and floor light */
+.diyas { position: relative; gap: .5rem; }
+.diya { width: 2.7rem; height: 2.1rem; }
+.diya::after { height: 100%; border-radius: 0; box-shadow: none; background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 40%22%3E%3Cdefs%3E%3ClinearGradient id=%22c%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23d9783a%22/%3E%3Cstop offset=%22.45%22 stop-color=%22%23a8501f%22/%3E%3Cstop offset=%221%22 stop-color=%22%235e260c%22/%3E%3C/linearGradient%3E%3CradialGradient id=%22o%22 cx=%22.45%22 cy=%22.4%22 r=%22.7%22%3E%3Cstop offset=%220%22 stop-color=%22%23ffcf6a%22 stop-opacity=%22.9%22/%3E%3Cstop offset=%22.35%22 stop-color=%22%23b8701e%22/%3E%3Cstop offset=%221%22 stop-color=%22%234a2208%22/%3E%3C/radialGradient%3E%3CradialGradient id=%22h%22 cx=%22.3%22 cy=%22.3%22 r=%22.5%22%3E%3Cstop offset=%220%22 stop-color=%22%23ffd6a8%22 stop-opacity=%22.55%22/%3E%3Cstop offset=%221%22 stop-color=%22%23ffd6a8%22 stop-opacity=%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d=%22M3 15 Q30 9 52 12 L62 7 Q60 15 53 18 Q47 37 28 37 Q8 37 3 15Z%22 fill=%22url%28%23c%29%22/%3E%3Cpath d=%22M3 15 Q30 9 52 12 L62 7 Q60 15 53 18 Q47 37 28 37 Q8 37 3 15Z%22 fill=%22url%28%23h%29%22/%3E%3Cellipse cx=%2228%22 cy=%2215%22 rx=%2224%22 ry=%224.6%22 fill=%22url%28%23o%29%22/%3E%3Cpath d=%22M4.5 15.5 Q28 22 52 15%22 fill=%22none%22 stroke=%22%23f0a35e%22 stroke-opacity=%22.55%22 stroke-width=%221%22/%3E%3Cg fill=%22%23f3c27a%22 fill-opacity=%22.7%22%3E%3Ccircle cx=%2216%22 cy=%2226%22 r=%221.1%22/%3E%3Ccircle cx=%2222%22 cy=%2228.5%22 r=%221.1%22/%3E%3Ccircle cx=%2228%22 cy=%2229.5%22 r=%221.1%22/%3E%3Ccircle cx=%2234%22 cy=%2228.5%22 r=%221.1%22/%3E%3Ccircle cx=%2240%22 cy=%2226%22 r=%221.1%22/%3E%3C/g%3E%3Cpath d=%22M57 10.5 L60 8%22 stroke=%22%232b1408%22 stroke-width=%221.6%22 stroke-linecap=%22round%22/%3E%3C/svg%3E") center bottom / 100% auto no-repeat; filter: drop-shadow(0 3px 3px rgba(0,0,0,.55)); }
+.flame { left: 92%; bottom: 66%; width: 9px; height: 24px; z-index: 2; border-radius: 50% 50% 45% 45% / 72% 72% 28% 28%;
+  background: radial-gradient(ellipse 40% 22% at 50% 88%, rgba(90,130,255,.95), rgba(90,130,255,0) 100%), radial-gradient(ellipse 55% 70% at 50% 72%, #fff 0 16%, #fff4b8 30%, #ffc93c 50%, #ff8a1e 70%, rgba(255,90,0,0) 82%);
+  filter: blur(.3px); transform-origin: 50% 95%; }
+.flame::before { content: ""; position: absolute; left: 50%; bottom: 8%; width: 3px; height: 40%; translate: -50% 0; border-radius: 50%; background: rgba(255,255,255,.85); filter: blur(1px); }
+.flame::after { width: 70px; height: 70px; top: 60%; background: radial-gradient(circle, rgba(255,186,80,.55), rgba(255,150,40,.18) 40%, rgba(255,150,40,0) 70%); animation: glow 1.8s ease-in-out calc(var(--i) * -0.3s) infinite alternate; }
+.gate.lit .flame { animation: flick calc(0.9s + var(--i) * 0.13s) ease-in-out calc(var(--i) * 140ms + .5s) infinite; }
+@keyframes flick {
+  0% { transform: translateX(-50%) scale(1, 1) skewX(0deg); }
+  20% { transform: translateX(-50%) scale(.94, 1.08) skewX(-3deg); }
+  40% { transform: translateX(-50%) scale(1.04, .95) skewX(2deg); }
+  60% { transform: translateX(-50%) scale(.97, 1.1) skewX(-1deg); }
+  80% { transform: translateX(-50%) scale(1.02, .97) skewX(3deg); }
+  100% { transform: translateX(-50%) scale(1, 1) skewX(0deg); } }
+@keyframes glow { from { opacity: .75; } to { opacity: 1; } }
+.diyas::after { content: ""; position: absolute; left: -10%; right: -10%; bottom: -18px; height: 30px; border-radius: 50%; background: radial-gradient(ellipse at 50% 30%, rgba(255,170,70,.45), rgba(255,170,70,0) 70%); opacity: 0; transition: opacity 1.2s ease .4s; pointer-events: none; }
+.gate.lit .diyas::after { opacity: 1; }
 
 /* dots */
 .dots { position: fixed; right: calc(env(safe-area-inset-right, 0px) + 14px); top: 50%; transform: translateY(-50%); z-index: 20; display: grid; gap: .7rem; }
@@ -357,8 +392,8 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
   <a href="#sangeet" data-only="all"><span>Sangeet &amp; Engagement</span></a>
   <a href="#wedding"><span>Wedding</span></a>
   <a href="#venues"><span>Venues</span></a>
-  <a href="#rsvp"><span>RSVP</span></a>
   <a href="#blessings"><span>Blessings</span></a>
+  <a href="#rsvp"><span>RSVP</span></a>
 </nav>
 
 <!-- 1. Cover -->
@@ -386,7 +421,6 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
 <path d="M110 3 C100 10 100 20 110 25 C120 20 120 10 110 3Z" stroke-width="1.2"/>
 <path d="M110 25 C98 24 94 16 96 10 M110 25 C122 24 126 16 124 10" stroke-width="1.1"/></g>
 <g fill="currentColor"><circle cx="4" cy="14" r="1.8"/><circle cx="216" cy="14" r="1.8"/><circle cx="110" cy="14" r="1.6"/></g></svg>
-    <a class="btn solid" href="#rsvp" style="--accent:var(--maroon)">RSVP</a>
     <p class="lede" data-side="groom"><b>Smt. Kusum Gupta &amp; Shri Vinod Gupta</b> request the pleasure of your company at the wedding of their son.</p>
     <p class="lede" data-side="bride"><b>Smt. Usha Chaudhary &amp; Shri B.S. Chaudhary</b> request the pleasure of your company at the wedding of their daughter.</p>
     <a class="scroll-cue" href="#invitation" style="text-decoration:none">Open the invitation<span></span></a>
@@ -478,7 +512,7 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
       </dl>
       <div class="actions">
         <a class="btn solid" href="https://share.google/DhckDq7Jnr9I8tWUf" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Get directions</a>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Open Google link</a>
         <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Haldi%20%E2%80%93%20Ravi%20%26%20Priyanshi&dates=20270223T043000Z/20270223T090000Z&location=Gulmohar%20Grand%20Farms%20%26%20Banquet%2C%20Vasundhara%2C%20Ghaziabad&details=Haldi%20ceremony.%20Dress%20code%3A%20groom%27s%20side%20shades%20of%20blue%3B%20bride%27s%20side%20shades%20of%20yellow.%20Map%3A%20https%3A%2F%2Fshare.google%2FDhckDq7Jnr9I8tWUf" target="_blank" rel="noopener">Add to calendar</a>
       </div>
     </div>
@@ -505,7 +539,7 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
       </dl>
       <div class="actions">
         <a class="btn solid" href="https://share.google/DhckDq7Jnr9I8tWUf" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Get directions</a>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Open Google link</a>
         <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sangeet%20%26%20Engagement%20%E2%80%93%20Ravi%20%26%20Priyanshi&dates=20270223T130000Z/20270223T180000Z&location=Gulmohar%20Grand%20Farms%20%26%20Banquet%2C%20Vasundhara%2C%20Ghaziabad&details=Sangeet%20and%20Engagement.%20Starts%206%3A30%20pm.%20Map%3A%20https%3A%2F%2Fshare.google%2FDhckDq7Jnr9I8tWUf" target="_blank" rel="noopener">Add to calendar</a>
       </div>
     </div>
@@ -533,7 +567,7 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
       </dl>
       <div class="actions">
         <a class="btn solid" href="https://share.google/WQj4FvOjVqKgDsG56" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Get directions</a>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Open Google link</a>
         <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding%20%E2%80%93%20Ravi%20%26%20Priyanshi&dates=20270224T140000Z/20270224T190000Z&location=Jalsa%20Hall%2C%20Sanssara%20Banquets%2C%20Vasundhara%2C%20Ghaziabad&details=Wedding%20of%20Ravi%20Gupta%20and%20Priyanshi%20Chaudhary.%20Map%3A%20https%3A%2F%2Fshare.google%2FWQj4FvOjVqKgDsG56" data-side="bride" target="_blank" rel="noopener">Add to calendar</a>
         <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding%20%E2%80%93%20Ravi%20%26%20Priyanshi&dates=20270224T143000Z/20270224T190000Z&location=Jalsa%20Hall%2C%20Sanssara%20Banquets%2C%20Vasundhara%2C%20Ghaziabad&details=Wedding%20of%20Ravi%20Gupta%20and%20Priyanshi%20Chaudhary.%20Map%3A%20https%3A%2F%2Fshare.google%2FWQj4FvOjVqKgDsG56%20Baraat%20departs%208%3A00%20pm%2C%20reaches%20the%20venue%209%3A00%20pm." data-side="groom" target="_blank" rel="noopener">Add to calendar</a>
       </div>
@@ -555,7 +589,7 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
         <span class="addr">Vasundhara, Ghaziabad</span>
         <p class="what">Haldi (10:00 am – 2:30 pm)<br>Sangeet &amp; Engagement (from 6:30 pm)</p>
         <a class="btn" href="https://share.google/DhckDq7Jnr9I8tWUf" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Open in Google Maps</a>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Open Google link</a>
       </div>
       <div class="venue">
         <span class="when">24 February 2027</span>
@@ -565,32 +599,8 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
         <p class="what" data-side="bride">Wedding (7:30 pm onwards)</p>
         <p class="what" data-side="groom">Baraat reaches at 9:00 pm</p>
         <a class="btn" href="https://share.google/WQj4FvOjVqKgDsG56" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Open in Google Maps</a>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Open Google link</a>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- 7b. RSVP -->
-<section class="slide rsvp" id="rsvp" data-dot="#6e0f1d">
-  <div class="frame"></div>
-  <div class="inner">
-    <div class="eyebrow">Kindly respond</div>
-    <h2 style="color:var(--maroon)">RSVP</h2>
-    <p class="lede">Let us know if you can join and how many of you are coming, so we can plan seating and food.</p>
-    <div class="rsvp-card">
-      <p class="rsvp-intro">The RSVP form takes under a minute. It asks for:</p>
-      <ul class="rsvp-list">
-        <li>Your name and phone number</li>
-        <li>Whether you can join us</li>
-        <li>Number of people coming, including you</li>
-        <li data-only="all">Which functions you'll attend</li>
-      </ul>
-      <div class="actions">
-        <a class="btn solid" id="rsvp-btn" href="#rsvp" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm6 1.5V8h4.5L13 3.5zM8 12v1.5h8V12H8zm0 3.5V17h8v-1.5H8zm0 3.5v1.5h5V19H8z"/></svg>Open the RSVP form</a>
-      </div>
-      <p class="rsvp-soon" id="rsvp-soon" hidden>The RSVP form will open here soon. Please check back in a few days.</p>
     </div>
   </div>
 </section>
@@ -628,15 +638,39 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
   </div>
 </section>
 
+<!-- 7b. RSVP -->
+<section class="slide rsvp" id="rsvp" data-dot="#6e0f1d">
+  <div class="frame"></div>
+  <div class="inner">
+    <div class="eyebrow">Kindly respond</div>
+    <h2 style="color:var(--maroon)">RSVP</h2>
+    <p class="lede">Let us know if you can join and how many of you are coming, so we can plan seating and food.</p>
+    <div class="rsvp-card">
+      <p class="rsvp-intro">The RSVP form takes under a minute. It asks for:</p>
+      <ul class="rsvp-list">
+        <li>Your name and phone number</li>
+        <li>Whether you can join us</li>
+        <li>Number of people coming, including you</li>
+        <li data-only="all">Which functions you'll attend</li>
+      </ul>
+      <div class="actions">
+        <a class="btn solid" id="rsvp-btn" href="#rsvp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm6 1.5V8h4.5L13 3.5zM8 12v1.5h8V12H8zm0 3.5V17h8v-1.5H8zm0 3.5v1.5h5V19H8z"/></svg>Open the RSVP form</a>
+      </div>
+      <p class="rsvp-soon" id="rsvp-soon" hidden>The RSVP form will open here soon. Please check back in a few days.</p>
+    </div>
+  </div>
+</section>
+
 <script>
 (function () {
   // Two links: the full invitation (no hash) and the wedding-only one (#shadi)
   // RSVP: one pre-filled Google Form link per invitation (see RSVP-google-form.md)
   var RSVP = {
-    "groom-all":   "",   // groom form, pre-filled "Shaadi + Engagement"
-    "groom-shadi": "",   // groom form, pre-filled "Shaadi only"
-    "bride-all":   "",   // bride form, pre-filled "Shaadi + Engagement"
-    "bride-shadi": ""    // bride form, pre-filled "Shaadi only"
+    "groom-all":   "https://docs.google.com/forms/d/1qmnKaOwwJBSjEF3hTXL6n0KVOvrkhznS6mipwV7xs34/viewform",
+    "groom-shadi": "https://docs.google.com/forms/d/1qmnKaOwwJBSjEF3hTXL6n0KVOvrkhznS6mipwV7xs34/viewform",
+    "bride-all":   "https://docs.google.com/forms/d/1jE_RC4g-XnbAOzdSxbIIKwruvJWRZ_ZCrOicdNjwzHg/viewform",
+    "bride-shadi": "https://docs.google.com/forms/d/1jE_RC4g-XnbAOzdSxbIIKwruvJWRZ_ZCrOicdNjwzHg/viewform"
   };
   // Four links: #groom, #groom-shadi, #bride, #bride-shadi (no hash = groom, all functions; #shadi = groom, wedding only)
   var CFG = window.INVITE || null;   // set by the pyaarkaPR-* pages on GitHub
@@ -842,7 +876,7 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
         if (en.isIntersecting) {
           var id = "#" + en.target.id;
           dots.forEach(function (d) { d.classList.toggle("on", d.getAttribute("href") === id); });
-          nav.style.setProperty("--dot", en.target.dataset.dot || "#b8862b");
+          nav.style.setProperty("--dot", en.target.dataset.dot === "#6e0f1d" ? "var(--maroon)" : (en.target.dataset.dot || "#b8862b"));
         }
       });
     }, { threshold: 0.55 });
