@@ -631,9 +631,12 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
 <script>
 (function () {
   // Two links: the full invitation (no hash) and the wedding-only one (#shadi)
+  // RSVP: one pre-filled Google Form link per invitation (see RSVP-google-form.md)
   var RSVP = {
-    form: "",       // Google Form for the full invitation, e.g. "https://forms.gle/..."
-    formShadi: ""   // Google Form for wedding-only guests; leave empty to use the one above
+    "groom-all":   "",   // groom form, pre-filled "Shaadi + Engagement"
+    "groom-shadi": "",   // groom form, pre-filled "Shaadi only"
+    "bride-all":   "",   // bride form, pre-filled "Shaadi + Engagement"
+    "bride-shadi": ""    // bride form, pre-filled "Shaadi only"
   };
   // Four links: #groom, #groom-shadi, #bride, #bride-shadi (no hash = groom, all functions; #shadi = groom, wedding only)
   var CFG = window.INVITE || null;   // set by the pyaarkaPR-* pages on GitHub
@@ -857,7 +860,7 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
   });
 
   // RSVP: opens the Google Form for this invitation
-  var rsvpUrl = MODE === "shadi" ? (RSVP.formShadi || RSVP.form) : RSVP.form;
+  var rsvpUrl = RSVP[SIDE + "-" + MODE] || "";
   var rsvpBtn = document.getElementById("rsvp-btn");
   if (/^https:\/\//.test(rsvpUrl)) { rsvpBtn.href = rsvpUrl; }
   else { rsvpBtn.hidden = true; document.getElementById("rsvp-soon").hidden = false; }
