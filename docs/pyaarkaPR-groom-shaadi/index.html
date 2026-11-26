@@ -309,15 +309,14 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
 /* Side palettes: groom = royal blue & gold, bride = rani pink & gold */
 body.side-groom { --maroon: #1f3f7a; }
 body.side-bride { --maroon: #a3174f; }
-body.side-groom .cover, body.side-groom .rsvp { --bg: radial-gradient(120% 90% at 50% 0%, #f8faff 0%, #e8eef9 60%, #d8e2f3 100%); }
+body.side-groom .rsvp { --bg: radial-gradient(120% 90% at 50% 0%, #f8faff 0%, #e8eef9 60%, #d8e2f3 100%); }
+body.side-groom .cover, body.side-groom .count { --maroon: #6e0f1d; }
 body.side-groom .invite, body.side-groom .venues { --bg: #f6f8fd; }
 body.side-groom .closing { --bg: radial-gradient(120% 90% at 50% 100%, #d8e2f3 0%, #e8eef9 45%, #f8faff 100%); }
-body.side-groom .count { --bg: linear-gradient(160deg, #0c1a3d 0%, #1f3f7a 55%, #2c5597 100%); }
 body.side-bride .cover, body.side-bride .rsvp { --bg: radial-gradient(120% 90% at 50% 0%, #fff8fa 0%, #fbe6ed 60%, #f5d0dd 100%); }
 body.side-bride .invite, body.side-bride .venues { --bg: #fff7f9; }
 body.side-bride .closing { --bg: radial-gradient(120% 90% at 50% 100%, #f5d0dd 0%, #fbe6ed 45%, #fff8fa 100%); }
 body.side-bride .count { --bg: linear-gradient(160deg, #3d0820 0%, #8e1446 55%, #b3245e 100%); }
-body.side-groom .arch.couple { box-shadow: 0 0 0 6px #f8faff, 0 0 0 7px #d9bb7a, 0 24px 50px -18px rgba(31,63,122,.45); }
 body.side-bride .arch.couple { box-shadow: 0 0 0 6px #fff8fa, 0 0 0 7px #d9bb7a, 0 24px 50px -18px rgba(163,23,79,.4); }
 
 /* Realistic diyas: clay bowl with oil and spout, layered flame, warm glow and floor light */
@@ -651,7 +650,6 @@ body.side-bride .arch.couple { box-shadow: 0 0 0 6px #fff8fa, 0 0 0 7px #d9bb7a,
         <li>Your name and phone number</li>
         <li>Whether you can join us</li>
         <li>Number of people coming, including you</li>
-        <li data-only="all">Which functions you'll attend</li>
       </ul>
       <div class="actions">
         <a class="btn solid" id="rsvp-btn" href="#rsvp" target="_blank" rel="noopener">
@@ -668,9 +666,9 @@ body.side-bride .arch.couple { box-shadow: 0 0 0 6px #fff8fa, 0 0 0 7px #d9bb7a,
   // RSVP: one pre-filled Google Form link per invitation (see RSVP-google-form.md)
   var RSVP = {
     "groom-all":   "https://docs.google.com/forms/d/1qmnKaOwwJBSjEF3hTXL6n0KVOvrkhznS6mipwV7xs34/viewform",
-    "groom-shadi": "https://docs.google.com/forms/d/1qmnKaOwwJBSjEF3hTXL6n0KVOvrkhznS6mipwV7xs34/viewform",
+    "groom-shadi": "https://docs.google.com/forms/d/1ySlqU11Q9__U6ahnhv620XWWz7IOQD2bMkqApi25nUo/viewform",
     "bride-all":   "https://docs.google.com/forms/d/1jE_RC4g-XnbAOzdSxbIIKwruvJWRZ_ZCrOicdNjwzHg/viewform",
-    "bride-shadi": "https://docs.google.com/forms/d/1jE_RC4g-XnbAOzdSxbIIKwruvJWRZ_ZCrOicdNjwzHg/viewform"
+    "bride-shadi": "https://docs.google.com/forms/d/19ffXA2-kr0tG9GKFs6iWvbmjgwsBQzj71rSMcK6iKFg/viewform"
   };
   // Four links: #groom, #groom-shadi, #bride, #bride-shadi (no hash = groom, all functions; #shadi = groom, wedding only)
   var CFG = window.INVITE || null;   // set by the pyaarkaPR-* pages on GitHub
