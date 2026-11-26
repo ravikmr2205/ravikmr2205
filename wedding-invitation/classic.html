@@ -288,6 +288,9 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
 .door .pn::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; translate: -50% -50%; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff4c9 0 1px, #d9ab4a 2px, #7a5216 4px, transparent 5px); }
 .steps { position: absolute; left: -24%; right: -24%; bottom: -16px; height: 16px; z-index: 0; background: linear-gradient(#cfae80 0 50%, #a7845c 50% 100%); clip-path: polygon(6% 0, 94% 0, 100% 50%, 100% 100%, 0 100%, 0 50%); box-shadow: 0 8px 18px rgba(0,0,0,.5); }
 
+.hashtag { font-family: var(--body); font-weight: 600; letter-spacing: .04em; font-size: 1.05rem; color: #b8862b; padding: .25rem .9rem; border: 1px solid rgba(184,134,43,.45); border-radius: 999px; }
+.hashtag-note { margin: 0; font-size: .85rem; font-style: italic; color: #7a6450; }
+
 /* dots */
 .dots { position: fixed; right: calc(env(safe-area-inset-right, 0px) + 14px); top: 50%; transform: translateY(-50%); z-index: 20; display: grid; gap: .7rem; }
 .dots a { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--dot, #b8862b); background: transparent; display: block; transition: background .2s, transform .2s; }
@@ -361,6 +364,7 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
       <span class="amp">&amp;</span>
       <span class="n">Ravi</span>
     </div>
+    <div class="hashtag">#pyaarkaPR</div>
     <svg class="divider" viewBox="0 0 220 28" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round">
 <path d="M6 14 H78" stroke-width="1"/><path d="M142 14 H214" stroke-width="1"/>
 <path d="M80 14 q8 -8 16 0 q-8 8 -16 0z M124 14 q8 -8 16 0 q-8 8 -16 0z" stroke-width="1"/>
@@ -586,6 +590,7 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
     <img class="ganesh-art small" src="images/ganesh-gold.png" alt="Ganesh ji">
     <span class="n" data-side="groom">Ravi &amp; Priyanshi</span>
     <span class="n" data-side="bride">Priyanshi &amp; Ravi</span>
+    <div class="hashtag">#pyaarkaPR</div>
     <svg class="divider" viewBox="0 0 220 28" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round">
 <path d="M6 14 H78" stroke-width="1"/><path d="M142 14 H214" stroke-width="1"/>
 <path d="M80 14 q8 -8 16 0 q-8 8 -16 0z M124 14 q8 -8 16 0 q-8 8 -16 0z" stroke-width="1"/>
@@ -599,6 +604,7 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
       <span class="hostline fams" data-side="groom">and the Gupta &amp; Chaudhary families</span>
       <span class="hostline fams" data-side="bride">and the Chaudhary &amp; Gupta families</span>
     </div>
+    <p class="hashtag-note">Share your photos with <b>#pyaarkaPR</b></p>
     <p class="music-credit" hidden></p>
     <div class="copy-row">
       <button type="button" id="copy-link">Copy invitation link</button>
@@ -615,9 +621,10 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
     formShadi: ""   // Google Form for wedding-only guests; leave empty to use the one above
   };
   // Four links: #groom, #groom-shadi, #bride, #bride-shadi (no hash = groom, all functions; #shadi = groom, wedding only)
+  var CFG = window.INVITE || null;   // set by the pyaarkaPR-* pages on GitHub
   var HASH = location.hash.replace("#", "");
-  var SIDE = /^bride/.test(HASH) ? "bride" : "groom";
-  var MODE = /shadi$/.test(HASH) ? "shadi" : "all";
+  var SIDE = CFG ? CFG.side : (/^bride/.test(HASH) ? "bride" : "groom");
+  var MODE = CFG ? CFG.mode : (/shadi$/.test(HASH) ? "shadi" : "all");
   document.body.classList.add("mode-" + MODE, "side-" + SIDE);
   document.querySelectorAll("[data-only]").forEach(function (n) { n.hidden = n.dataset.only !== MODE; });
   document.querySelectorAll("[data-side]").forEach(function (n) { if (n.dataset.side !== SIDE) n.hidden = true; });
@@ -827,7 +834,7 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
   // Copy link
   var btn = document.getElementById("copy-link"), msg = document.getElementById("copy-msg");
   btn.addEventListener("click", function () {
-    var url = location.href.split("#")[0] + "#" + SIDE + (MODE === "shadi" ? "-shadi" : "");
+    var url = CFG ? location.href.split("#")[0] : location.href.split("#")[0] + "#" + SIDE + (MODE === "shadi" ? "-shadi" : "");
     try {
       navigator.clipboard.writeText(url).then(function () { msg.textContent = "Link copied."; },
         function () { msg.textContent = url; });
