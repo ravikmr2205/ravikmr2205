@@ -4,20 +4,27 @@ The claude.ai artifacts (index.html, classic.html here) are page fragments;
 GitHub Pages needs full HTML documents, so this wraps them, copies the photos
 and music, and writes the four #pyaarkaPR invitation links as their own pages.
 Run from the repository root:  python3 wedding-invitation/build_site.py
+To build the pyaarkapr.github.io site:  python3 wedding-invitation/build_site.py pyaarkapr <path to its checkout>
 """
-import pathlib, shutil
+import pathlib, shutil, sys
 
-SITE = "https://ravikmr2205.github.io/ravikmr2205/"
 src = pathlib.Path(__file__).parent
-out = src.parent / "docs"
+PYAARKAPR = len(sys.argv) > 1 and sys.argv[1] == "pyaarkapr"
+if PYAARKAPR:
+    SITE = "https://pyaarkapr.github.io/"
+    out = pathlib.Path(sys.argv[2])
+else:
+    SITE = "https://ravikmr2205.github.io/ravikmr2205/"
+    out = src.parent / "docs"
 out.mkdir(exist_ok=True)
 
 # The four guest links: folder name -> (side, functions shown, page title)
+PFX = "" if PYAARKAPR else "pyaarkaPR-"
 LINKS = {
-    "pyaarkaPR-groom":         ("groom", "all",   "Ravi & Priyanshi Shubh Vivah"),
-    "pyaarkaPR-groom-shaadi":  ("groom", "shadi", "Ravi & Priyanshi Shubh Vivah"),
-    "pyaarkaPR-bride":         ("bride", "all",   "Priyanshi & Ravi Shubh Vivah"),
-    "pyaarkaPR-bride-shaadi":  ("bride", "shadi", "Priyanshi & Ravi Shubh Vivah"),
+    PFX + "groom":         ("groom", "all",   "Ravi & Priyanshi Shubh Vivah"),
+    PFX + "groom-shaadi":  ("groom", "shadi", "Ravi & Priyanshi Shubh Vivah"),
+    PFX + "bride":         ("bride", "all",   "Priyanshi & Ravi Shubh Vivah"),
+    PFX + "bride-shaadi":  ("bride", "shadi", "Priyanshi & Ravi Shubh Vivah"),
 }
 
 
@@ -31,8 +38,11 @@ def wrap(page, extra_head=""):
     return head + body + "\n</body>\n</html>\n"
 
 
-for name in ("index.html", "classic.html"):
-    (out / name).write_text(wrap((src / name).read_text(encoding="utf-8")), encoding="utf-8")
+if PYAARKAPR:  # the bare address shows the groom-side invitation
+    (out / "index.html").write_text(wrap((src / "classic.html").read_text(encoding="utf-8")), encoding="utf-8")
+else:
+    for name in ("index.html", "classic.html"):
+        (out / name).write_text(wrap((src / name).read_text(encoding="utf-8")), encoding="utf-8")
 
 classic = (src / "classic.html").read_text(encoding="utf-8")
 for folder, (side, mode, title) in LINKS.items():
@@ -50,7 +60,12 @@ for folder, (side, mode, title) in LINKS.items():
     d.mkdir(exist_ok=True)
     (d / "index.html").write_text(wrap(page, head), encoding="utf-8")
 
-shutil.copytree(src / "images", out / "images", dirs_exist_ok=True)
+if PYAARKAPR:  # only the files the classic invitation uses
+    (out / "images").mkdir(exist_ok=True)
+    for f in ("couple-waist.jpg", "ganesh-gold.png"):
+        shutil.copy(src / "images" / f, out / "images" / f)
+else:
+    shutil.copytree(src / "images", out / "images", dirs_exist_ok=True)
 shutil.copytree(src / "music", out / "music", dirs_exist_ok=True)
 (out / ".nojekyll").write_text("")
-print("Built", ", ".join(["index.html", "classic.html"] + [f + "/" for f in LINKS]))
+print("Built", out, ":", ", ".join([f + "/" for f in LINKS]))
