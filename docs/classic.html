@@ -38,7 +38,7 @@ body { background: var(--ivory); color: var(--ink); font-family: var(--body); fo
   display: grid; place-items: center; overflow: hidden;
   background: var(--bg); color: var(--fg);
   padding-block: 4.5rem 4rem;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-left: max(56px, calc(env(safe-area-inset-left, 0px) + 44px));
   padding-right: max(56px, calc(env(safe-area-inset-right, 0px) + 44px));
 }
 .inner { position: relative; z-index: 2; width: 100%; max-width: 40rem; text-align: center; display: grid; gap: 1.1rem; justify-items: center; }
@@ -232,6 +232,18 @@ html.gate-on, html.gate-on body { overflow: hidden; }
 
 .side { display: grid; gap: .3rem; margin-bottom: .5rem; }
 .side .swatches { justify-content: flex-start; }
+/* Background music */
+.music-btn { position: fixed; z-index: 30; left: calc(env(safe-area-inset-left, 0px) + 14px); bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
+  width: 44px; height: 44px; border-radius: 50%; border: 1px solid #b8862b; background: #fffaf0; color: #6e0f1d; display: grid; place-items: center; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.18); }
+.music-btn svg { width: 20px; height: 20px; fill: currentColor; }
+.music-btn .off { display: none; }
+.music-btn[aria-pressed="false"] .on { display: none; }
+.music-btn[aria-pressed="false"] .off { display: block; }
+.music-btn:focus-visible { outline: 2px solid #b8862b; outline-offset: 3px; }
+.music-btn[aria-pressed="true"] { animation: pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 6px rgba(184,134,43,.18), 0 4px 14px rgba(0,0,0,.18); } }
+.music-credit { margin: 0; font-size: .75rem; color: #7a6450; }
+
 /* dots */
 .dots { position: fixed; right: calc(env(safe-area-inset-right, 0px) + 14px); top: 50%; transform: translateY(-50%); z-index: 20; display: grid; gap: .7rem; }
 .dots a { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--dot, #b8862b); background: transparent; display: block; transition: background .2s, transform .2s; }
@@ -243,7 +255,9 @@ html.gate-on, html.gate-on body { overflow: hidden; }
   .families, .venue-grid { grid-template-columns: 1fr; }
   .fact { grid-template-columns: 4.6rem 1fr; }
   .frame { inset: 44px 8px 10px; }
-  .slide { padding-block: 4rem 3.4rem; }
+  .slide { padding-block: 4rem 3.4rem; padding-left: max(28px, calc(env(safe-area-inset-left, 0px) + 20px)); padding-right: max(28px, calc(env(safe-area-inset-right, 0px) + 20px)); }
+  .dots { right: calc(env(safe-area-inset-right, 0px) + 4px); gap: .55rem; }
+  .dots a { width: 9px; height: 9px; }
 }
 </style>
 
@@ -262,6 +276,12 @@ html.gate-on, html.gate-on body { overflow: hidden; }
     <button type="button" class="gate-skip" id="gate-skip">Skip intro</button>
   </div>
 </div>
+
+<audio id="bg-music" loop preload="none"></audio>
+<button type="button" class="music-btn" id="music-btn" aria-pressed="false" aria-label="Play music" hidden>
+  <svg class="on" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18.5A2.5 2.5 0 1 1 7 16V5l12-2v12.5a2.5 2.5 0 1 1-2-2.45V7.3l-8 1.33z"/></svg>
+  <svg class="off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.6 3 2.7-2.7-1.4-1.4-2.7 2.7-2.7-2.7-1.4 1.4 2.7 2.7-2.7 2.7 1.4 1.4 2.7-2.7 2.7 2.7 1.4-1.4z"/></svg>
+</button>
 
 <nav class="dots" aria-label="Sections">
   <a href="#home" class="on"><span>Home</span></a>
@@ -499,6 +519,7 @@ html.gate-on, html.gate-on body { overflow: hidden; }
       <span><b>Smt. Usha Chaudhary &amp; Shri B.S. Chaudhary</b></span>
       <span>and the Gupta &amp; Chaudhary families</span>
     </div>
+    <p class="music-credit" hidden></p>
     <div class="copy-row">
       <button type="button" id="copy-link">Copy invitation link</button>
       <span id="copy-msg" aria-live="polite"></span>
@@ -544,11 +565,12 @@ html.gate-on, html.gate-on body { overflow: hidden; }
       gateBtn.textContent = "Enter";
     } else if (!gate.classList.contains("open")) {
       gate.classList.add("open");
+      playMusic();
       closeGate(reduceMotion ? 0 : 1300);
     }
   }
   gate.addEventListener("click", function (e) { if (e.target.id !== "gate-skip") stepGate(); });
-  document.getElementById("gate-skip").addEventListener("click", function () { closeGate(0); });
+  document.getElementById("gate-skip").addEventListener("click", function () { closeGate(0); playMusic(); });
   gateBtn.focus({ preventScroll: true });
 
   // Scratch card for the dates
@@ -599,6 +621,31 @@ html.gate-on, html.gate-on body { overflow: hidden; }
   paintFoil();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (!started) paintFoil(); });
   window.addEventListener("resize", function () { if (!started && !revealed) paintFoil(); });
+
+
+  // Background music: starts on the guest's first tap, with a play/mute button
+  var MUSIC = {
+    src: "",     // e.g. "music/song.mp3"
+    credit: ""   // e.g. "Music: Raga Yaman on sitar by ..., CC BY-SA 4.0"
+  };
+  var audio = document.getElementById("bg-music"), musicBtn = document.getElementById("music-btn"), musicOn = false;
+  function setMusic(on) {
+    if (!MUSIC.src) return;
+    musicOn = on;
+    musicBtn.setAttribute("aria-pressed", on ? "true" : "false");
+    musicBtn.setAttribute("aria-label", on ? "Mute music" : "Play music");
+    if (on) {
+      audio.volume = 0; var p = audio.play();
+      if (p && p.catch) p.catch(function () { setMusic(false); });
+      var v = 0, fade = setInterval(function () { v = Math.min(.6, v + .05); audio.volume = v; if (v >= .6) clearInterval(fade); }, 120);
+    } else { audio.pause(); }
+  }
+  function playMusic() { if (MUSIC.src && !musicOn && !playMusic.done) { playMusic.done = true; setMusic(true); } }
+  if (MUSIC.src) {
+    audio.src = MUSIC.src; musicBtn.hidden = false;
+    musicBtn.addEventListener("click", function (e) { e.stopPropagation(); playMusic.done = true; setMusic(!musicOn); });
+    if (MUSIC.credit) document.querySelectorAll(".music-credit").forEach(function (n) { n.textContent = MUSIC.credit; n.hidden = false; });
+  }
 
   // Countdown: Haldi starts 23 Feb 2027, 10:00 IST (UTC+05:30)
   var events = MODE === "shadi" ? [
