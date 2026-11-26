@@ -178,6 +178,56 @@ body.mode-shadi .venue-grid { grid-template-columns: minmax(0, 24rem); justify-c
 .ganesh-art.small { width: 5.5rem; }
 .event-row .event-card { max-width: 30rem; }
 
+/* Temple gate intro */
+html.gate-on, html.gate-on body { overflow: hidden; }
+.gate { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; overflow-y: auto; cursor: pointer;
+  background: radial-gradient(90% 65% at 50% 78%, var(--glow, #2c1610) 0%, #120807 72%); color: #fbeedd;
+  padding: calc(env(safe-area-inset-top, 0px) + 1.5rem) max(16px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 1.5rem) max(16px, env(safe-area-inset-left, 0px));
+  transition: opacity .9s ease, visibility .9s, --glow 1s; }
+.gate.lit { --glow: #6e2c0e; }
+.gate.gone { opacity: 0; visibility: hidden; }
+.gate-stage { display: grid; justify-items: center; gap: 1.1rem; width: min(24rem, 100%); text-align: center; }
+.gate .eyebrow { color: #e7c97a; }
+.temple { position: relative; width: min(15rem, 62vw); aspect-ratio: 3 / 4; margin-top: 3.4rem; }
+.temple .g { position: absolute; left: 50%; top: -3.6rem; width: 4.6rem; height: auto; transform: translateX(-50%); z-index: 3; filter: drop-shadow(0 0 10px rgba(255, 200, 90, 0)); transition: filter 1s; }
+.gate.lit .temple .g { filter: drop-shadow(0 0 14px rgba(255, 200, 90, .8)); }
+.arch-stone { position: absolute; inset: 0; padding: 12px 12px 0; border-radius: 999px 999px 0 0; background: linear-gradient(#c9a27a, #8e6745); border: 3px solid #e7c97a; box-shadow: inset 0 0 0 5px rgba(0,0,0,.12); }
+.doorway { position: relative; height: 100%; overflow: hidden; border-radius: 999px 999px 0 0; perspective: 900px;
+  background: radial-gradient(circle at 50% 62%, #fff6d1 0%, #f7bf4a 40%, #b4541a 100%); }
+.door { position: absolute; top: 0; bottom: 0; width: 50%; background: repeating-linear-gradient(90deg, #6b3a1c 0 16px, #55300f 16px 18px); transition: transform 1.6s cubic-bezier(.6, .05, .3, 1); backface-visibility: hidden; }
+.door.l { left: 0; transform-origin: left center; border-right: 1px solid #2b160a; }
+.door.r { right: 0; transform-origin: right center; }
+.door::before { content: ""; position: absolute; inset: 14% 16%; background: radial-gradient(circle, #e7c97a 0 2.5px, transparent 3.5px) 0 0 / 20px 20px; opacity: .75; }
+.door::after { content: ""; position: absolute; top: 54%; width: 14px; height: 14px; border: 3px solid #e7c97a; border-radius: 50%; }
+.door.l::after { right: 8px; } .door.r::after { left: 8px; }
+.gate.open .door.l { transform: rotateY(-108deg); }
+.gate.open .door.r { transform: rotateY(108deg); }
+.diyas { display: flex; flex-wrap: wrap; justify-content: center; gap: .55rem; }
+.diya { position: relative; width: 2.4rem; height: 2.4rem; }
+.diya::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 52%; border-radius: 4px 4px 50% 50% / 4px 4px 100% 100%; background: linear-gradient(#d0702f, #7d3412); box-shadow: inset 0 3px 0 #e89a5a; }
+.flame { position: absolute; left: 50%; bottom: 46%; width: 12px; height: 22px; border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  background: radial-gradient(circle at 50% 72%, #fff 0 14%, #ffe066 38%, #ff8a1f 72%, rgba(255,120,0,0) 76%);
+  transform: translateX(-50%) scale(0); transform-origin: 50% 90%; transition: transform .45s ease calc(var(--i) * 140ms); }
+.flame::after { content: ""; position: absolute; left: 50%; top: 55%; width: 46px; height: 46px; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, rgba(255, 190, 80, .45), rgba(255,190,80,0) 70%); }
+.gate.lit .flame { transform: translateX(-50%) scale(1); animation: flicker 1.1s ease-in-out calc(var(--i) * 140ms + .5s) infinite alternate; }
+@keyframes flicker { from { transform: translateX(-50%) scale(1) rotate(-3deg); } to { transform: translateX(-50%) scale(.9, 1.06) rotate(3deg); } }
+.gate-btn { font: inherit; font-family: var(--caps); letter-spacing: .16em; font-size: .85rem; padding: .8rem 1.4rem; background: #e7c97a; color: #3a0a12; border: 0; cursor: pointer; }
+.gate-btn:focus-visible, .gate-skip:focus-visible { outline: 2px solid #fff4dc; outline-offset: 3px; }
+.gate-hint { margin: 0; font-style: italic; font-weight: 300; color: #f3dcbc; }
+.gate-skip { font: inherit; font-size: .8rem; background: none; border: 0; color: #c9ae8e; text-decoration: underline; cursor: pointer; }
+
+/* Scratch to reveal */
+.scratch { position: relative; width: min(24rem, 100%); background: #fff6e4; color: var(--maroon); border: 1px solid var(--line); }
+.scratch-under { display: grid; gap: 1.1rem; padding: 1.5rem 1rem; }
+.scratch-under > div { display: grid; gap: .2rem; }
+.sd-ev { font-family: var(--caps); letter-spacing: .14em; font-size: .78rem; color: #9a6a00; }
+.sd-date { font-family: var(--display); font-size: clamp(1.4rem, 6vw, 1.9rem); line-height: 1.15; }
+.scratch canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: crosshair; transition: opacity .7s ease; }
+.scratch.done canvas { opacity: 0; pointer-events: none; }
+.link-btn { font: inherit; font-size: .85rem; background: none; border: 0; color: var(--accent); text-decoration: underline; cursor: pointer; }
+.after-reveal { display: grid; gap: 1rem; justify-items: center; width: 100%; }
+.arch.couple { width: min(15rem, 62vw); }
+
 /* dots */
 .dots { position: fixed; right: calc(env(safe-area-inset-right, 0px) + 14px); top: 50%; transform: translateY(-50%); z-index: 20; display: grid; gap: .7rem; }
 .dots a { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--dot, #b8862b); background: transparent; display: block; transition: background .2s, transform .2s; }
@@ -252,6 +302,22 @@ body.mode-shadi .venue-grid { grid-template-columns: minmax(0, 24rem); justify-c
     <path d="M152 198 Q140 200 142 190" fill="none" stroke-width="2"/>
   </g>
 </symbol></svg>
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Welcome to the wedding of Ravi and Priyanshi">
+  <div class="gate-stage">
+    <div class="eyebrow">॥ शुभ विवाह ॥</div>
+    <div class="temple">
+      <svg class="g" role="img" aria-label="Ganesh ji"><use href="#ganesh-art"/></svg>
+      <div class="arch-stone"><div class="doorway"><div class="door l"></div><div class="door r"></div></div></div>
+    </div>
+    <div class="diyas" aria-hidden="true">
+      <span class="diya"><span class="flame" style="--i:0"></span></span><span class="diya"><span class="flame" style="--i:1"></span></span><span class="diya"><span class="flame" style="--i:2"></span></span><span class="diya"><span class="flame" style="--i:3"></span></span><span class="diya"><span class="flame" style="--i:4"></span></span><span class="diya"><span class="flame" style="--i:5"></span></span><span class="diya"><span class="flame" style="--i:6"></span></span>
+    </div>
+    <p class="gate-hint" id="gate-hint">Tap to light the diyas</p>
+    <button type="button" class="gate-btn" id="gate-btn">Light the diyas</button>
+    <button type="button" class="gate-skip" id="gate-skip">Skip intro</button>
+  </div>
+</div>
+
 <nav class="dots" aria-label="Sections">
   <a href="#home" class="on"><span>Home</span></a>
   <a href="#invitation"><span>Invitation</span></a>
@@ -269,7 +335,7 @@ body.mode-shadi .venue-grid { grid-template-columns: minmax(0, 24rem); justify-c
   <div class="frame"></div>
   <div class="inner">
     <div class="ganesh">॥ श्री गणेशाय नमः ॥</div>
-    <svg class="ganesh-art" role="img" aria-label="Cartoon Ganesh ji holding a modak, with his mouse"><use href="#ganesh-art"/></svg>
+    <div class="arch couple"><img src="images/couple.jpg" alt="Illustration of Ravi in a red kurta and Priyanshi in a white and yellow floral suit"></div>
     <div class="eyebrow">Together with their families</div>
     <div class="names">
       <span class="n">Ravi</span>
@@ -277,7 +343,6 @@ body.mode-shadi .venue-grid { grid-template-columns: minmax(0, 24rem); justify-c
       <span class="n">Priyanshi</span>
     </div>
     <div class="rule"></div>
-    <div class="cover-dates"><span data-only="all">23 &amp; 24 February 2027</span><span data-only="shadi">Wednesday, 24 February 2027</span></div>
     <a class="btn solid" href="#rsvp" style="--accent:var(--maroon)">RSVP</a>
     <p class="lede">request the pleasure of your company as they begin their journey together.</p>
     <a class="scroll-cue" href="#invitation" style="text-decoration:none">Open the invitation<span></span></a>
@@ -313,7 +378,16 @@ body.mode-shadi .venue-grid { grid-template-columns: minmax(0, 24rem); justify-c
   <div class="frame"></div>
   <div class="inner">
     <div class="eyebrow">Save the date</div>
-    <h2 style="color:#fff4dc">The celebrations begin in</h2>
+    <h2 style="color:#fff4dc" id="sd-title">Scratch to reveal the dates</h2>
+    <div class="scratch" id="scratch">
+      <div class="scratch-under">
+        <div data-only="all"><span class="sd-ev">Haldi · Sangeet &amp; Engagement</span><span class="sd-date">Tuesday, 23 February 2027</span></div>
+        <div><span class="sd-ev">Wedding</span><span class="sd-date">Wednesday, 24 February 2027</span></div>
+      </div>
+      <canvas id="scratch-canvas" aria-hidden="true"></canvas>
+    </div>
+    <button type="button" class="link-btn" id="scratch-skip">Reveal without scratching</button>
+    <div class="after-reveal" id="after-reveal" hidden>
     <div class="timer" id="timer" aria-live="polite">
       <div><b id="cd-d">--</b><small>Days</small></div>
       <div><b id="cd-h">--</b><small>Hours</small></div>
@@ -325,6 +399,7 @@ body.mode-shadi .venue-grid { grid-template-columns: minmax(0, 24rem); justify-c
       <a href="#haldi" data-only="all"><span class="d">23 Feb</span><span>Haldi · 10:00 am – 2:30 pm</span></a>
       <a href="#sangeet" data-only="all"><span class="d">23 Feb</span><span>Sangeet &amp; Engagement · from 6:30 pm</span></a>
       <a href="#wedding"><span class="d">24 Feb</span><span>Wedding</span></a>
+    </div>
     </div>
   </div>
 </section>
@@ -501,6 +576,81 @@ body.mode-shadi .venue-grid { grid-template-columns: minmax(0, 24rem); justify-c
     var t = document.getElementById(a.getAttribute("href").slice(1));
     if (t) { e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); }
   });
+
+
+  // Temple gate: first tap lights the diyas, second opens the doors
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var gate = document.getElementById("gate"), gateBtn = document.getElementById("gate-btn"), gateHint = document.getElementById("gate-hint");
+  document.documentElement.classList.add("gate-on");
+  function closeGate(delay) {
+    setTimeout(function () {
+      gate.classList.add("gone");
+      document.documentElement.classList.remove("gate-on");
+      setTimeout(function () { gate.hidden = true; }, 900);
+    }, delay);
+  }
+  function stepGate() {
+    if (!gate.classList.contains("lit")) {
+      gate.classList.add("lit");
+      gateHint.textContent = "The diyas are lit. Step inside.";
+      gateBtn.textContent = "Enter";
+    } else if (!gate.classList.contains("open")) {
+      gate.classList.add("open");
+      closeGate(reduceMotion ? 0 : 1300);
+    }
+  }
+  gate.addEventListener("click", function (e) { if (e.target.id !== "gate-skip") stepGate(); });
+  document.getElementById("gate-skip").addEventListener("click", function () { closeGate(0); });
+  gateBtn.focus({ preventScroll: true });
+
+  // Scratch card for the dates
+  var card = document.getElementById("scratch"), cv = document.getElementById("scratch-canvas"), ctx = cv.getContext("2d");
+  var after = document.getElementById("after-reveal"), revealed = false, started = false, drawing = false, last = null, moves = 0, dpr = 1;
+  function paintFoil() {
+    var r = card.getBoundingClientRect(); if (!r.width) return;
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
+    ctx.globalCompositeOperation = "source-over";
+    var g = ctx.createLinearGradient(0, 0, cv.width, cv.height);
+    g.addColorStop(0, "#b8862b"); g.addColorStop(.45, "#f3dc8f"); g.addColorStop(.55, "#e7c97a"); g.addColorStop(1, "#a8761f");
+    ctx.fillStyle = g; ctx.fillRect(0, 0, cv.width, cv.height);
+    ctx.fillStyle = "rgba(255,255,255,.35)";
+    for (var i = 0; i < 160; i++) ctx.fillRect(Math.random() * cv.width, Math.random() * cv.height, 2 * dpr, 2 * dpr);
+    ctx.fillStyle = "#5a0d18"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.font = (16 * dpr) + "px 'Marcellus SC', Georgia, serif";
+    ctx.fillText("SCRATCH HERE", cv.width / 2, cv.height / 2 - 10 * dpr);
+    ctx.font = "italic " + (13 * dpr) + "px Spectral, Georgia, serif";
+    ctx.fillText("with your finger or mouse", cv.width / 2, cv.height / 2 + 14 * dpr);
+  }
+  function reveal() {
+    if (revealed) return; revealed = true;
+    card.classList.add("done"); after.hidden = false;
+    document.getElementById("sd-title").textContent = "The celebrations begin in";
+    document.getElementById("scratch-skip").hidden = true;
+  }
+  function cleared() {
+    var d = ctx.getImageData(0, 0, cv.width, cv.height).data, clear = 0, n = 0;
+    for (var i = 3; i < d.length; i += 4 * 23) { n++; if (d[i] < 40) clear++; }
+    return n ? clear / n : 0;
+  }
+  function pt(e) { var r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) * dpr, y: (e.clientY - r.top) * dpr }; }
+  cv.addEventListener("pointerdown", function (e) {
+    drawing = true; started = true; last = pt(e);
+    try { cv.setPointerCapture(e.pointerId); } catch (err) {}
+    ctx.globalCompositeOperation = "destination-out"; ctx.beginPath(); ctx.arc(last.x, last.y, 20 * dpr, 0, Math.PI * 2); ctx.fill();
+  });
+  cv.addEventListener("pointermove", function (e) {
+    if (!drawing) return;
+    var p = pt(e);
+    ctx.globalCompositeOperation = "destination-out"; ctx.lineWidth = 40 * dpr; ctx.lineCap = "round";
+    ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(p.x, p.y); ctx.stroke(); last = p;
+    if (++moves % 12 === 0 && cleared() > .45) reveal();
+  });
+  ["pointerup", "pointercancel"].forEach(function (t) { cv.addEventListener(t, function () { drawing = false; if (cleared() > .45) reveal(); }); });
+  document.getElementById("scratch-skip").addEventListener("click", reveal);
+  paintFoil();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (!started) paintFoil(); });
+  window.addEventListener("resize", function () { if (!started && !revealed) paintFoil(); });
 
   // Countdown: Haldi starts 23 Feb 2027, 10:00 IST (UTC+05:30)
   var events = MODE === "shadi" ? [
