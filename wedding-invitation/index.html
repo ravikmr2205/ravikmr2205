@@ -159,25 +159,11 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
 
 /* RSVP */
 .rsvp { --bg: radial-gradient(120% 90% at 50% 0%, #fffaf0 0%, #f6ead2 70%, #efdcb8 100%); --t1:#e9a21a; --t2:#c0392b; --accent: var(--maroon); --card:#fffdf8; }
-.rsvp-card { display: grid; gap: 1rem; width: 100%; max-width: 30rem; padding: 1.4rem 1.2rem; background: var(--card); border: 1px solid var(--line); text-align: left; }
-.field { display: grid; gap: .4rem; border: 0; margin: 0; padding: 0; min-width: 0; }
-.field label, .field legend { font-family: var(--caps); letter-spacing: .12em; font-size: .76rem; color: var(--maroon); padding: 0; }
-.field input[type=text], .field textarea, .stepper input { font: inherit; font-size: 1rem; color: var(--ink); background: #fff; border: 1px solid rgba(110,15,29,.3); padding: .6rem .7rem; border-radius: 2px; width: 100%; }
-.field input:focus-visible, .field textarea:focus-visible, .stepper button:focus-visible, .pill input:focus-visible + span { outline: 2px solid var(--gold); outline-offset: 2px; }
-.choice-row { display: flex; flex-wrap: wrap; gap: .5rem; }
-.pill { position: relative; cursor: pointer; }
-.pill input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
-.pill span { display: inline-block; padding: .45rem .85rem; border: 1px solid rgba(110,15,29,.35); font-size: .92rem; color: var(--maroon); background: #fff; }
-.pill input:checked + span { background: var(--maroon); color: #fff6e6; border-color: var(--maroon); }
-.stepper { display: grid; grid-template-columns: 2.8rem 5rem 2.8rem; }
-.stepper button { font: inherit; font-size: 1.3rem; border: 1px solid rgba(110,15,29,.3); background: #f6ead2; color: var(--maroon); cursor: pointer; }
-.stepper input { text-align: center; border-left: 0; border-right: 0; font-variant-numeric: tabular-nums; -moz-appearance: textfield; }
-.stepper input::-webkit-inner-spin-button { -webkit-appearance: none; }
-.rsvp-error { margin: 0; min-height: 1.2em; color: #a3122a; font-size: .92rem; }
-.rsvp-fallback { display: grid; gap: .5rem; justify-items: start; font-size: .92rem; }
-.rsvp-fallback p { margin: 0; }
-.rsvp-fallback pre { margin: 0; width: 100%; white-space: pre-wrap; font-family: var(--body); font-size: .9rem; background: #f6ead2; padding: .7rem; border: 1px dashed var(--line); }
-.rsvp-fallback .btn { --btn-fg: var(--maroon); cursor: pointer; font-family: var(--caps); }
+.rsvp-card { display: grid; gap: 1rem; width: 100%; max-width: 28rem; padding: 1.4rem 1.2rem; background: var(--card); border: 1px solid var(--line); text-align: left; }
+.rsvp-intro, .rsvp-soon { margin: 0; }
+.rsvp-soon { font-style: italic; color: var(--maroon); text-align: center; }
+.rsvp-list { margin: 0; padding-left: 1.2rem; display: grid; gap: .3rem; }
+.rsvp-list li::marker { color: var(--gold); }
 body.mode-shadi .venue-grid { grid-template-columns: minmax(0, 24rem); justify-content: center; }
 
 /* dots */
@@ -426,51 +412,20 @@ body.mode-shadi .venue-grid { grid-template-columns: minmax(0, 24rem); justify-c
     <div class="eyebrow">Kindly respond</div>
     <h2 style="color:var(--maroon)">RSVP</h2>
     <p class="lede">Let us know if you can join and how many of you are coming, so we can plan seating and food.</p>
-    <form class="rsvp-card" id="rsvp-form" novalidate>
-      <div class="field">
-        <label for="rsvp-name">Your name</label>
-        <input id="rsvp-name" type="text" autocomplete="name" placeholder="e.g. Sharma family">
-      </div>
-      <fieldset class="field">
-        <legend>Will you join us?</legend>
-        <div class="choice-row">
-          <label class="pill"><input type="radio" name="attend" id="rsvp-yes" value="yes" checked><span>Joyfully attending</span></label>
-          <label class="pill"><input type="radio" name="attend" id="rsvp-no" value="no"><span>Sorry, can't make it</span></label>
-        </div>
-      </fieldset>
-      <div class="field" id="rsvp-count-field">
-        <label for="rsvp-count">Number of people (including you)</label>
-        <div class="stepper">
-          <button type="button" id="rsvp-minus" aria-label="One fewer person">&minus;</button>
-          <input id="rsvp-count" type="number" inputmode="numeric" min="1" max="30" value="2">
-          <button type="button" id="rsvp-plus" aria-label="One more person">+</button>
-        </div>
-      </div>
-      <fieldset class="field" id="rsvp-events-field" data-only="all">
-        <legend>Functions you'll attend</legend>
-        <div class="choice-row">
-          <label class="pill"><input type="checkbox" id="rsvp-ev-haldi" value="Haldi (23 Feb)" checked><span>Haldi</span></label>
-          <label class="pill"><input type="checkbox" id="rsvp-ev-sangeet" value="Sangeet &amp; Engagement (23 Feb)" checked><span>Sangeet &amp; Engagement</span></label>
-          <label class="pill"><input type="checkbox" id="rsvp-ev-wedding" value="Wedding (24 Feb)" checked><span>Wedding</span></label>
-        </div>
-      </fieldset>
-      <div class="field">
-        <label for="rsvp-note">Message for the couple (optional)</label>
-        <textarea id="rsvp-note" rows="2" placeholder="Blessings, dietary needs, arrival time..."></textarea>
-      </div>
-      <p class="rsvp-error" id="rsvp-error" aria-live="polite"></p>
+    <div class="rsvp-card">
+      <p class="rsvp-intro">The RSVP form takes under a minute. It asks for:</p>
+      <ul class="rsvp-list">
+        <li>Your name and phone number</li>
+        <li>Whether you can join us</li>
+        <li>Number of people coming, including you</li>
+        <li data-only="all">Which functions you'll attend</li>
+      </ul>
       <div class="actions">
-        <a class="btn solid" id="rsvp-wa" href="#rsvp" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.3.4c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8 1 .9 1.8 1.1 2 1.3.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.4.2.5.3.1.2.1.7-.1 1.2z"/></svg>Send RSVP on WhatsApp</a>
-        <a class="btn" id="rsvp-form-link" href="#rsvp" target="_blank" rel="noopener" hidden>Or fill the RSVP form</a>
+        <a class="btn solid" id="rsvp-btn" href="#rsvp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm6 1.5V8h4.5L13 3.5zM8 12v1.5h8V12H8zm0 3.5V17h8v-1.5H8zm0 3.5v1.5h5V19H8z"/></svg>Open the RSVP form</a>
       </div>
-      <div class="rsvp-fallback" id="rsvp-fallback" hidden>
-        <p>Copy this message and send it to the family:</p>
-        <pre id="rsvp-preview"></pre>
-        <button type="button" class="btn" id="rsvp-copy">Copy RSVP message</button>
-        <span id="rsvp-copy-msg" aria-live="polite"></span>
-      </div>
-    </form>
+      <p class="rsvp-soon" id="rsvp-soon" hidden>The RSVP form will open here soon. Please check back in a few days.</p>
+    </div>
   </div>
 </section>
 
@@ -501,8 +456,8 @@ body.mode-shadi .venue-grid { grid-template-columns: minmax(0, 24rem); justify-c
 (function () {
   // Two links: the full invitation (no hash) and the wedding-only one (#shadi)
   var RSVP = {
-    whatsapp: "",   // number with country code, digits only, e.g. "919876543210"
-    form: ""        // Google Form link, e.g. "https://forms.gle/..."
+    form: "",       // Google Form for the full invitation, e.g. "https://forms.gle/..."
+    formShadi: ""   // Google Form for wedding-only guests; leave empty to use the one above
   };
   var MODE = location.hash === "#shadi" ? "shadi" : "all";
   document.body.classList.add("mode-" + MODE);
@@ -511,7 +466,7 @@ body.mode-shadi .venue-grid { grid-template-columns: minmax(0, 24rem); justify-c
   // In-page links scroll without touching the address, so #shadi stays put
   document.addEventListener("click", function (e) {
     var a = e.target.closest && e.target.closest('a[href^="#"]');
-    if (!a || a.id === "rsvp-wa" || a.id === "rsvp-form-link") return;
+    if (!a || a.id === "rsvp-btn") return;
     var t = document.getElementById(a.getAttribute("href").slice(1));
     if (t) { e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); }
   });
@@ -584,60 +539,10 @@ body.mode-shadi .venue-grid { grid-template-columns: minmax(0, 24rem); justify-c
     } catch (e) { msg.textContent = url; }
   });
 
-  // RSVP
-  var f = {
-    name: document.getElementById("rsvp-name"), yes: document.getElementById("rsvp-yes"),
-    count: document.getElementById("rsvp-count"), note: document.getElementById("rsvp-note"),
-    countField: document.getElementById("rsvp-count-field"), evField: document.getElementById("rsvp-events-field"),
-    err: document.getElementById("rsvp-error"), wa: document.getElementById("rsvp-wa"),
-    formLink: document.getElementById("rsvp-form-link"), fb: document.getElementById("rsvp-fallback"),
-    preview: document.getElementById("rsvp-preview")
-  };
-  var evBoxes = ["rsvp-ev-haldi", "rsvp-ev-sangeet", "rsvp-ev-wedding"].map(function (id) { return document.getElementById(id); });
-  function count() { var n = parseInt(f.count.value, 10); return isNaN(n) ? 1 : Math.min(30, Math.max(1, n)); }
-  function message() {
-    var going = f.yes.checked;
-    var lines = ["RSVP: Wedding of Ravi & Priyanshi", "Name: " + (f.name.value.trim() || "-")];
-    if (going) {
-      var evs = MODE === "shadi" ? ["Wedding (24 Feb)"] : evBoxes.filter(function (b) { return b.checked; }).map(function (b) { return b.value; });
-      lines.push("Attending: Yes", "Number of people: " + count(), "Functions: " + (evs.join(", ") || "-"));
-    } else {
-      lines.push("Attending: Sorry, can't make it");
-    }
-    if (f.note.value.trim()) lines.push("Message: " + f.note.value.trim());
-    lines.push("Invitation: " + (MODE === "shadi" ? "Wedding only" : "All functions"));
-    return lines.join("\n");
-  }
-  function refresh() {
-    var going = f.yes.checked;
-    f.countField.hidden = !going;
-    if (MODE === "all") f.evField.hidden = !going;
-    var text = message();
-    f.preview.textContent = text;
-    if (RSVP.whatsapp) f.wa.href = "https://wa.me/" + RSVP.whatsapp + "?text=" + encodeURIComponent(text);
-  }
-  if (!RSVP.whatsapp) { f.wa.hidden = true; f.fb.hidden = false; }
-  if (RSVP.form) { f.formLink.href = RSVP.form; f.formLink.hidden = false; }
-  document.getElementById("rsvp-minus").addEventListener("click", function () { f.count.value = Math.max(1, count() - 1); refresh(); });
-  document.getElementById("rsvp-plus").addEventListener("click", function () { f.count.value = Math.min(30, count() + 1); refresh(); });
-  document.getElementById("rsvp-form").addEventListener("input", refresh);
-  document.getElementById("rsvp-form").addEventListener("change", refresh);
-  document.getElementById("rsvp-form").addEventListener("submit", function (e) { e.preventDefault(); });
-  function valid() {
-    if (!f.name.value.trim()) { f.err.textContent = "Please add your name so we know who is coming."; f.name.focus(); return false; }
-    if (f.yes.checked && MODE === "all" && !evBoxes.some(function (b) { return b.checked; })) { f.err.textContent = "Pick at least one function you'll attend."; return false; }
-    f.err.textContent = ""; return true;
-  }
-  f.wa.addEventListener("click", function (e) { refresh(); if (!valid()) e.preventDefault(); });
-  document.getElementById("rsvp-copy").addEventListener("click", function () {
-    var m = document.getElementById("rsvp-copy-msg");
-    if (!valid()) return;
-    var text = message();
-    try {
-      navigator.clipboard.writeText(text).then(function () { m.textContent = "Copied. Paste it in a message to the family."; },
-        function () { m.textContent = "Select the text above and copy it."; });
-    } catch (e) { m.textContent = "Select the text above and copy it."; }
-  });
-  refresh();
+  // RSVP: opens the Google Form for this invitation
+  var rsvpUrl = MODE === "shadi" ? (RSVP.formShadi || RSVP.form) : RSVP.form;
+  var rsvpBtn = document.getElementById("rsvp-btn");
+  if (/^https:\/\//.test(rsvpUrl)) { rsvpBtn.href = rsvpUrl; }
+  else { rsvpBtn.hidden = true; document.getElementById("rsvp-soon").hidden = false; }
 })();
 </script>

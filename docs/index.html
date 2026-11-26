@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Ravi & Priyanshi</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Tiro+Devanagari+Hindi&family=Marcellus+SC&display=swap">
+</head>
+<body>
+<style>
+/* Layout: full-screen slides with scroll-snap, one colour world per ceremony, dot navigation on the side.
+   Single deliberate look (an invitation card), so colours are fixed rather than theme-switched. */
+:root {
+  color-scheme: light;
+  --ivory: #fbf6ec;
+  --ink: #2b1a14;
+  --gold: #b8862b;
+  --gold-soft: #e7c97a;
+  --maroon: #6e0f1d;
+  --display: "Rozha One", "Tiro Devanagari Hindi", Georgia, serif;
+  --body: "Spectral", Georgia, "Times New Roman", serif;
+  --caps: "Marcellus SC", "Spectral", Georgia, serif;
+  --deva: "Tiro Devanagari Hindi", "Noto Serif Devanagari", serif;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+body { background: var(--ivory); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+.slide {
+  --bg: var(--ivory); --fg: var(--ink); --accent: var(--gold); --soft: var(--gold-soft); --line: rgba(184,134,43,.45);
+  position: relative; min-height: 100svh; scroll-snap-align: start;
+  display: grid; place-items: center; overflow: hidden;
+  background: var(--bg); color: var(--fg);
+  padding-block: 4.5rem 4rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(56px, calc(env(safe-area-inset-right, 0px) + 44px));
+}
+.inner { position: relative; z-index: 2; width: 100%; max-width: 40rem; text-align: center; display: grid; gap: 1.1rem; justify-items: center; }
+
+/* toran: a string of marigolds and leaves along the top of each slide */
+.slide::before {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 34px; z-index: 1;
+  background:
+    radial-gradient(circle at 14px 10px, var(--t1, #f39c12) 0 9px, transparent 10px) 0 0 / 28px 34px repeat-x,
+    radial-gradient(circle at 14px 10px, var(--t2, #e67e22) 0 5px, transparent 6px) 0 0 / 28px 34px repeat-x,
+    radial-gradient(ellipse 5px 9px at 0 22px, var(--leaf, #3f7a3a) 0 100%, transparent 101%) 0 0 / 28px 34px repeat-x;
+  opacity: .95;
+}
+.frame { position: absolute; inset: 46px 12px 14px; border: 1px solid var(--line); border-radius: 2px; pointer-events: none; z-index: 1; }
+.frame::after { content: ""; position: absolute; inset: 6px; border: 1px solid var(--line); opacity: .6; }
+
+.eyebrow { font-family: var(--caps); letter-spacing: .22em; font-size: .82rem; color: var(--accent); text-transform: uppercase; }
+.deva { font-family: var(--deva); color: var(--accent); font-size: 1.15rem; }
+h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; line-height: 1.05; text-wrap: balance; }
+h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
+.lede { max-width: 32rem; margin: 0; font-style: italic; font-weight: 300; font-size: 1.08rem; }
+.rule { width: 9rem; height: 14px; background:
+  linear-gradient(var(--accent), var(--accent)) center / 100% 1px no-repeat,
+  radial-gradient(circle, var(--accent) 0 4px, transparent 5px) center / 14px 14px no-repeat; }
+
+/* Cover */
+.cover { --bg: radial-gradient(120% 90% at 50% 0%, #fffaf0 0%, #f6ead2 60%, #efdcb8 100%); --t1:#e9a21a; --t2:#c0392b; }
+.ganesh { font-family: var(--deva); color: var(--maroon); font-size: 1.05rem; }
+.names { display: grid; gap: .35rem; justify-items: center; }
+.names .n { font-family: var(--display); color: var(--maroon); font-size: clamp(3rem, 13vw, 5.6rem); line-height: 1; }
+.names .amp { font-family: var(--display); color: var(--gold); font-size: clamp(2rem, 7vw, 3rem); line-height: 1; }
+.parents { font-size: .98rem; color: #5b4636; margin: 0; }
+.parents b { font-weight: 600; color: var(--ink); }
+.cover-dates { font-family: var(--caps); letter-spacing: .18em; color: var(--maroon); font-size: 1rem; }
+.scroll-cue { margin-top: .8rem; font-family: var(--caps); letter-spacing: .2em; font-size: .75rem; color: var(--gold); display: grid; gap: .3rem; justify-items: center; }
+.scroll-cue span { width: 1px; height: 28px; background: var(--gold); animation: cue 1.8s ease-in-out infinite; transform-origin: top; }
+@keyframes cue { 0%,100% { transform: scaleY(.3); opacity: .4 } 50% { transform: scaleY(1); opacity: 1 } }
+
+/* Invitation / families */
+.invite { --bg: #fffaf2; --t1:#d4a017; --t2:#b03a2e; }
+.families { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; width: 100%; }
+.fam { display: grid; gap: .25rem; padding: 1rem .5rem; }
+.fam .who { font-family: var(--caps); letter-spacing: .16em; font-size: .78rem; color: var(--gold); }
+.fam .nm { font-family: var(--display); font-size: 1.8rem; color: var(--maroon); line-height: 1.1; }
+.fam .rel { font-size: .95rem; color: #5b4636; }
+
+/* Countdown */
+.count { --bg: linear-gradient(160deg, #3a0a12 0%, #6e0f1d 55%, #8a1c2b 100%); --fg: #fbeedd; --accent: #e7c97a; --line: rgba(231,201,122,.4); --t1:#f1c40f; --t2:#e67e22; }
+.timer { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .6rem; width: 100%; max-width: 30rem; }
+.timer div { display: grid; gap: .1rem; padding: .9rem .2rem; border: 1px solid var(--line); }
+.timer b { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 8vw, 3rem); line-height: 1; font-variant-numeric: tabular-nums; color: #fff4dc; }
+.timer small { font-family: var(--caps); letter-spacing: .16em; font-size: .7rem; color: var(--accent); }
+.timeline { display: grid; gap: .5rem; width: 100%; max-width: 28rem; margin-top: .4rem; }
+.timeline a { display: grid; grid-template-columns: 5.2rem 1fr; gap: .8rem; align-items: baseline; text-align: left; color: inherit; text-decoration: none; padding: .55rem .2rem; border-bottom: 1px solid var(--line); }
+.timeline a:hover, .timeline a:focus-visible { color: #fff; }
+.timeline .d { font-family: var(--caps); letter-spacing: .1em; color: var(--accent); font-size: .85rem; }
+
+/* Event slides */
+.event-card { display: grid; gap: .9rem; width: 100%; max-width: 30rem; padding: 1.4rem 1.2rem; background: var(--card); border: 1px solid var(--line); }
+.facts { display: grid; gap: .7rem; text-align: left; }
+.fact { display: grid; grid-template-columns: 5.6rem 1fr; gap: .8rem; align-items: baseline; }
+.fact dt { font-family: var(--caps); letter-spacing: .14em; font-size: .75rem; color: var(--accent); }
+.fact dd { margin: 0; font-size: 1.02rem; }
+.fact dd strong { font-weight: 600; }
+.actions { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; }
+.btn { display: inline-flex; align-items: center; gap: .45rem; padding: .7rem 1.1rem; font-family: var(--caps); letter-spacing: .12em; font-size: .8rem; text-decoration: none; border: 1px solid var(--btn-bd, var(--accent)); color: var(--btn-fg, var(--fg)); background: var(--btn-bg, transparent); transition: transform .15s ease, background .15s ease; }
+.btn.solid { background: var(--accent); color: var(--on-accent, #fff); border-color: var(--accent); }
+.btn:hover { transform: translateY(-1px); }
+.btn:focus-visible, .dots a:focus-visible, .timeline a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.btn svg { width: 15px; height: 15px; flex: none; }
+.swatches { display: flex; gap: .4rem; justify-content: center; align-items: center; font-size: .85rem; }
+.swatches i { width: 18px; height: 18px; border-radius: 50%; display: inline-block; border: 1px solid rgba(0,0,0,.12); }
+
+.haldi { --bg: radial-gradient(110% 80% at 50% 10%, #fff8c9 0%, #ffe680 45%, #f9c932 100%); --fg: #4a3200; --accent: #9a6a00; --soft:#ffd84d; --line: rgba(154,106,0,.35); --card: rgba(255,252,232,.72); --on-accent:#fffbea; --t1:#f7b500; --t2:#ffdf3d; }
+.haldi h2 { color: #7a4f00; }
+.sangeet { --bg: radial-gradient(120% 90% at 50% 0%, #4b145f 0%, #2a0b3d 60%, #1a0628 100%); --fg: #fbe9f4; --accent: #f28ab8; --line: rgba(242,138,184,.38); --card: rgba(255,255,255,.06); --on-accent:#2a0b3d; --t1:#e84393; --t2:#f8c291; --leaf:#2e8b57; }
+.sangeet h2 { color: #ffd6ea; }
+.sangeet .ring { font-family: var(--caps); letter-spacing: .2em; color: #f8c291; font-size: .85rem; }
+.wedding { --bg: radial-gradient(120% 90% at 50% 0%, #8f1626 0%, #6a0d1a 55%, #430812 100%); --fg: #fff1df; --accent: #e3b55a; --line: rgba(227,181,90,.42); --card: rgba(0,0,0,.16); --on-accent:#430812; --t1:#e74c3c; --t2:#f39c12; }
+.wedding h2 { color: #f6d58f; }
+.wedding .deva { color: #f6d58f; font-size: 1.5rem; }
+
+/* sparkle / petals layer */
+.petals { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.petals i { position: absolute; top: -20px; width: 10px; height: 14px; border-radius: 60% 0 60% 0; background: var(--petal, #f4b400); opacity: .75; animation: fall linear infinite; }
+@keyframes fall { to { transform: translate3d(var(--dx, 30px), 110svh, 0) rotate(540deg); } }
+.sangeet .petals i { --petal: #f28ab8; border-radius: 50%; width: 5px; height: 5px; opacity: .8; animation-name: twinkle; top: auto; }
+@keyframes twinkle { 0%,100% { opacity: .1 } 50% { opacity: .95 } }
+.wedding .petals i { --petal: #d63031; }
+
+/* Venues + closing */
+.venues { --bg: #fffaf2; --t1:#d4a017; --t2:#b03a2e; --card:#fff; }
+.venue-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; width: 100%; }
+.venue { display: grid; gap: .5rem; padding: 1.2rem 1rem; background: var(--card); border: 1px solid var(--line); text-align: left; align-content: start; }
+.venue .when { font-family: var(--caps); letter-spacing: .14em; font-size: .75rem; color: var(--gold); }
+.venue .vn { font-family: var(--display); font-size: 1.6rem; line-height: 1.1; color: var(--maroon); }
+.venue .what { font-size: .95rem; color: #5b4636; margin: 0; }
+.venue .btn { justify-self: start; margin-top: .3rem; --btn-fg: var(--maroon); }
+.closing { --bg: radial-gradient(120% 90% at 50% 100%, #efdcb8 0%, #f6ead2 45%, #fffaf0 100%); --t1:#e9a21a; --t2:#c0392b; }
+.closing .n { font-family: var(--display); color: var(--maroon); font-size: clamp(2.4rem, 10vw, 4rem); line-height: 1; }
+.closing .sign { display: grid; gap: .2rem; font-size: .98rem; color: #5b4636; }
+.copy-row { display: flex; gap: .5rem; align-items: center; justify-content: center; flex-wrap: wrap; font-size: .9rem; }
+.copy-row button { font: inherit; font-family: var(--caps); letter-spacing: .12em; font-size: .75rem; padding: .5rem .9rem; border: 1px solid var(--gold); background: transparent; color: var(--maroon); cursor: pointer; }
+.copy-row button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+/* Host photos */
+.arch { width: min(13rem, 56vw); aspect-ratio: 3 / 4; max-width: 100%; border-radius: 999px 999px 10px 10px; overflow: hidden; border: 3px solid var(--accent); box-shadow: 0 0 0 6px var(--bg-solid, #fffaf0), 0 0 0 7px var(--line); }
+.arch img, .snap img, .round img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.host-tag { font-family: var(--caps); letter-spacing: .18em; font-size: .75rem; color: var(--maroon); display: inline-flex; gap: .4rem; align-items: center; }
+.host-tag svg { width: 14px; height: 14px; fill: currentColor; }
+.snap { margin: 0; display: grid; gap: .5rem; justify-items: center; width: min(12rem, 52vw); padding: .55rem .55rem .7rem; background: #fffdf8; color: #3b2a1e; box-shadow: 0 10px 24px rgba(0,0,0,.22); transform: rotate(var(--tilt, -2.5deg)); }
+.snap div { width: 100%; aspect-ratio: 3 / 4; overflow: hidden; }
+.snap figcaption { font-style: italic; font-size: .88rem; line-height: 1.3; text-align: center; }
+.event-row { display: flex; flex-wrap: wrap; gap: 1.6rem; align-items: center; justify-content: center; width: 100%; }
+.haldi .inner, .sangeet .inner, .wedding .inner { max-width: 48rem; }
+.event-row .event-card { flex: 1 1 18rem; min-width: 0; }
+.host { --bg: radial-gradient(110% 90% at 50% 0%, #fff6e2 0%, #f8e3c2 70%, #f1d3a6 100%); --t1:#e9a21a; --t2:#c0392b; }
+.host-grid { display: flex; flex-wrap: wrap; gap: 1.6rem; align-items: center; justify-content: center; text-align: left; }
+.host-grid .note { flex: 1 1 18rem; min-width: 0; display: grid; gap: .8rem; }
+.host-grid .note p { margin: 0; }
+.duties { display: grid; gap: .45rem; margin: 0; padding: 0; list-style: none; }
+.duties li { display: grid; grid-template-columns: 9.5rem 1fr; gap: .6rem; padding-bottom: .4rem; border-bottom: 1px dashed var(--line); font-size: .95rem; }
+.duties b { font-family: var(--caps); letter-spacing: .1em; font-weight: 400; font-size: .78rem; color: var(--maroon); }
+.round { width: 7.5rem; height: 7.5rem; border-radius: 50%; overflow: hidden; border: 3px solid var(--gold); }
+@media (max-width: 560px) { .duties li { grid-template-columns: 1fr; gap: .1rem; } .host-grid { text-align: center; } }
+
+/* RSVP */
+.rsvp { --bg: radial-gradient(120% 90% at 50% 0%, #fffaf0 0%, #f6ead2 70%, #efdcb8 100%); --t1:#e9a21a; --t2:#c0392b; --accent: var(--maroon); --card:#fffdf8; }
+.rsvp-card { display: grid; gap: 1rem; width: 100%; max-width: 28rem; padding: 1.4rem 1.2rem; background: var(--card); border: 1px solid var(--line); text-align: left; }
+.rsvp-intro, .rsvp-soon { margin: 0; }
+.rsvp-soon { font-style: italic; color: var(--maroon); text-align: center; }
+.rsvp-list { margin: 0; padding-left: 1.2rem; display: grid; gap: .3rem; }
+.rsvp-list li::marker { color: var(--gold); }
+body.mode-shadi .venue-grid { grid-template-columns: minmax(0, 24rem); justify-content: center; }
+
+/* dots */
+.dots { position: fixed; right: calc(env(safe-area-inset-right, 0px) + 14px); top: 50%; transform: translateY(-50%); z-index: 20; display: grid; gap: .7rem; }
+.dots a { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--dot, #b8862b); background: transparent; display: block; transition: background .2s, transform .2s; }
+.dots a.on { background: var(--dot, #b8862b); transform: scale(1.25); }
+.dots a span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .families, .venue-grid { grid-template-columns: 1fr; }
+  .fact { grid-template-columns: 4.6rem 1fr; }
+  .frame { inset: 44px 8px 10px; }
+  .slide { padding-block: 4rem 3.4rem; }
+}
+</style>
+
+<nav class="dots" aria-label="Sections">
+  <a href="#home" class="on"><span>Home</span></a>
+  <a href="#host"><span>A note from Tofu</span></a>
+  <a href="#invitation"><span>Invitation</span></a>
+  <a href="#countdown"><span>Countdown</span></a>
+  <a href="#haldi" data-only="all"><span>Haldi</span></a>
+  <a href="#sangeet" data-only="all"><span>Sangeet &amp; Engagement</span></a>
+  <a href="#wedding"><span>Wedding</span></a>
+  <a href="#venues"><span>Venues</span></a>
+  <a href="#rsvp"><span>RSVP</span></a>
+  <a href="#blessings"><span>Blessings</span></a>
+</nav>
+
+<!-- 1. Cover -->
+<section class="slide cover" id="home" data-dot="#6e0f1d">
+  <div class="frame"></div>
+  <div class="inner">
+    <div class="ganesh">॥ श्री गणेशाय नमः ॥</div>
+    <div class="arch"><img src="images/host-hills.jpg" alt="Tofu smiling on a misty hilltop, wearing a purple collar"></div>
+    <span class="host-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 13c-3 0-6 3.2-6 5.6C6 20.4 7.4 21 9 21c1.2 0 2-.6 3-.6s1.8.6 3 .6c1.6 0 3-.6 3-2.4C18 16.2 15 13 12 13zM5 12.5a2.2 2.8 0 1 0 0-5.6 2.2 2.8 0 0 0 0 5.6zm14 0a2.2 2.8 0 1 0 0-5.6 2.2 2.8 0 0 0 0 5.6zM9 9a2.3 3 0 1 0 0-6 2.3 3 0 0 0 0 6zm6 0a2.3 3 0 1 0 0-6 2.3 3 0 0 0 0 6z"/></svg>Tofu, your chief host, invites you</span>
+    <div class="eyebrow">Together with their families</div>
+    <div class="names">
+      <span class="n">Ravi</span>
+      <span class="amp">&amp;</span>
+      <span class="n">Priyanshi</span>
+    </div>
+    <div class="rule"></div>
+    <div class="cover-dates"><span data-only="all">23 &amp; 24 February 2027</span><span data-only="shadi">Wednesday, 24 February 2027</span></div>
+    <a class="btn solid" href="#rsvp" style="--accent:var(--maroon)">RSVP</a>
+    <p class="lede">request the pleasure of your company as they begin their journey together.</p>
+    <a class="scroll-cue" href="#invitation" style="text-decoration:none">Open the invitation<span></span></a>
+  </div>
+</section>
+
+<!-- 1b. A note from the host -->
+<section class="slide host" id="host" data-dot="#6e0f1d">
+  <div class="frame"></div>
+  <div class="inner" style="max-width:46rem">
+    <div class="eyebrow">A note from Tofu, your host</div>
+    <h2 style="color:var(--maroon)">Woof! I'm Tofu</h2>
+    <div class="host-grid">
+      <figure class="snap" style="--tilt:-3deg">
+        <div><img src="images/host-closeup.jpg" alt="Close-up of Tofu's nose, looking straight into the camera"></div>
+        <figcaption>Checking that you've read this properly.</figcaption>
+      </figure>
+      <div class="note">
+        <p>You're invited! I'm the youngest member of this family and the chief host of this wedding. My Ravi is marrying Priyanshi, and I have been given the most important job of all: making sure <em>you</em> come.</p>
+        <p><span data-only="all">There will be haldi, music, rings and a lot of food</span><span data-only="shadi">There will be pheras, music and a lot of food</span> I'm not allowed to eat. The celebrations may be a little too loud for my ears, so I might watch from a quiet corner at home. But my blessings and my tail wags will be with every one of you.</p>
+        <ul class="duties">
+          <li><b>Chief well-wisher</b><span>Sending blessings to the couple</span></li>
+          <li><b>Guest list approver</b><span>Every name sniffed and approved</span></li>
+          <li><b>Ring inspector</b><span>Checked both rings before the engagement</span></li>
+          <li><b>Quiet-corner supervisor</b><span>Keeping home calm while you all dance</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Families -->
+<section class="slide invite" id="invitation" data-dot="#b8862b">
+  <div class="frame"></div>
+  <div class="inner">
+    <div class="deva">शुभ विवाह</div>
+    <div class="eyebrow">With the blessings of our elders</div>
+    <p class="lede">We joyfully invite you and your family to celebrate the wedding of</p>
+    <div class="families">
+      <div class="fam">
+        <span class="who">The Groom</span>
+        <span class="nm">Ravi Gupta</span>
+        <span class="rel">son of<br><b>Smt. Kusum Gupta</b> &amp; <b>Shri Vinod Gupta</b></span>
+      </div>
+      <div class="fam">
+        <span class="who">The Bride</span>
+        <span class="nm">Priyanshi Chaudhary</span>
+        <span class="rel">daughter of<br><b>Smt. Usha Chaudhary</b> &amp; <b>Shri B.S. Chaudhari</b></span>
+      </div>
+    </div>
+    <div class="rule"></div>
+    <p class="lede">Your presence and blessings will make the occasion complete.</p>
+  </div>
+</section>
+
+<!-- 3. Countdown -->
+<section class="slide count" id="countdown" data-dot="#e7c97a">
+  <div class="frame"></div>
+  <div class="inner">
+    <div class="eyebrow">Save the date</div>
+    <h2 style="color:#fff4dc">The celebrations begin in</h2>
+    <div class="timer" id="timer" aria-live="polite">
+      <div><b id="cd-d">--</b><small>Days</small></div>
+      <div><b id="cd-h">--</b><small>Hours</small></div>
+      <div><b id="cd-m">--</b><small>Minutes</small></div>
+      <div><b id="cd-s">--</b><small>Seconds</small></div>
+    </div>
+    <p class="lede" id="cd-note">Counting down to the Haldi, Tuesday 23 February 2027, 10:00 am IST.</p>
+    <div class="timeline">
+      <a href="#haldi" data-only="all"><span class="d">23 Feb</span><span>Haldi · 10:00 am – 2:30 pm</span></a>
+      <a href="#sangeet" data-only="all"><span class="d">23 Feb</span><span>Sangeet &amp; Engagement · from 6:30 pm</span></a>
+      <a href="#wedding"><span class="d">24 Feb</span><span>Wedding</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Haldi -->
+<section data-only="all" class="slide haldi" id="haldi" data-dot="#9a6a00">
+  <div class="petals" data-n="18"></div>
+  <div class="frame"></div>
+  <div class="inner">
+    <div class="deva">हल्दी</div>
+    <div class="eyebrow">Ceremony one</div>
+    <h2>Haldi</h2>
+    <p class="lede">A morning of turmeric, laughter and blessings as we prepare the couple for the big day.</p>
+    <div class="event-row">
+      <figure class="snap" style="--tilt:-3deg">
+        <div><img src="images/host-garden.jpg" alt="Tofu sitting in a sunny garden among fallen white flowers, grinning"></div>
+        <figcaption>Practising my haldi smile. Yellow suits me.</figcaption>
+      </figure>
+      <div class="event-card">
+      <dl class="facts">
+        <div class="fact"><dt>Date</dt><dd><strong>Tuesday, 23 February 2027</strong></dd></div>
+        <div class="fact"><dt>Time</dt><dd>10:00 am to 2:30 pm</dd></div>
+        <div class="fact"><dt>Venue</dt><dd>Gulmohar Grand Farms &amp; Banquet</dd></div>
+        <div class="fact"><dt>Dress</dt><dd>Shades of yellow
+          <div class="swatches" style="justify-content:flex-start;margin-top:.35rem">
+            <i style="background:#fff3a3"></i><i style="background:#ffe14d"></i><i style="background:#f9c932"></i><i style="background:#f4a300"></i><i style="background:#d98e04"></i>
+          </div></dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn solid" href="https://share.google/DhckDq7Jnr9I8tWUf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Get directions</a>
+        <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Haldi%20%E2%80%93%20Ravi%20%26%20Priyanshi&dates=20270223T043000Z/20270223T090000Z&location=Gulmohar%20Grand%20Farms%20%26%20Banquet&details=Haldi%20ceremony.%20Dress%20code%3A%20shades%20of%20yellow.%20Map%3A%20https%3A%2F%2Fshare.google%2FDhckDq7Jnr9I8tWUf" target="_blank" rel="noopener">Add to calendar</a>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Sangeet & Engagement -->
+<section data-only="all" class="slide sangeet" id="sangeet" data-dot="#f28ab8">
+  <div class="petals" data-n="40"></div>
+  <div class="frame"></div>
+  <div class="inner">
+    <div class="deva" style="color:#f8c291">संगीत एवं सगाई</div>
+    <div class="eyebrow">Ceremony two</div>
+    <h2>Sangeet &amp; Engagement</h2>
+    <div class="ring">An evening of rings, music &amp; dance</div>
+    <p class="lede">Join us as the couple exchange rings, followed by a night of songs and dancing with both families.</p>
+    <div class="event-row">
+      <figure class="snap" style="--tilt:2.5deg">
+        <div><img src="images/host-bunny.jpg" alt="Tofu wearing a lilac bunny-ear headband"></div>
+        <figcaption>Dressed up to cheer from home.</figcaption>
+      </figure>
+      <div class="event-card">
+      <dl class="facts">
+        <div class="fact"><dt>Date</dt><dd><strong>Tuesday, 23 February 2027</strong></dd></div>
+        <div class="fact"><dt>Time</dt><dd>Event starts at 6:30 pm</dd></div>
+        <div class="fact"><dt>Venue</dt><dd>Gulmohar Grand Farms &amp; Banquet</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn solid" href="https://share.google/DhckDq7Jnr9I8tWUf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Get directions</a>
+        <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sangeet%20%26%20Engagement%20%E2%80%93%20Ravi%20%26%20Priyanshi&dates=20270223T130000Z/20270223T180000Z&location=Gulmohar%20Grand%20Farms%20%26%20Banquet&details=Sangeet%20and%20Engagement.%20Starts%206%3A30%20pm.%20Map%3A%20https%3A%2F%2Fshare.google%2FDhckDq7Jnr9I8tWUf" target="_blank" rel="noopener">Add to calendar</a>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Wedding -->
+<section class="slide wedding" id="wedding" data-dot="#e3b55a">
+  <div class="petals" data-n="22"></div>
+  <div class="frame"></div>
+  <div class="inner">
+    <div class="deva">शुभ विवाह</div>
+    <div class="eyebrow">The main ceremony</div>
+    <h2>Wedding</h2>
+    <p class="lede">Seven vows, one sacred fire and two families becoming one. We would be honoured to have you with us.</p>
+    <div class="event-row">
+      <figure class="snap" style="--tilt:-2deg">
+        <div><img src="images/host-towel.jpg" alt="Tofu wrapped in a blue hooded towel like a veil"></div>
+        <figcaption>Ghoonghat on, sending blessings for the pheras.</figcaption>
+      </figure>
+      <div class="event-card">
+      <dl class="facts">
+        <div class="fact"><dt>Date</dt><dd><strong>Wednesday, 24 February 2027</strong></dd></div>
+        <div class="fact"><dt>Time</dt><dd>Timings to be shared soon</dd></div>
+        <div class="fact"><dt>Venue</dt><dd>Sanssara Banquets</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn solid" href="https://share.google/WQj4FvOjVqKgDsG56" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Get directions</a>
+        <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding%20%E2%80%93%20Ravi%20%26%20Priyanshi&dates=20270224/20270225&location=Sanssara%20Banquets&details=Wedding%20of%20Ravi%20Gupta%20and%20Priyanshi%20Chaudhary.%20Map%3A%20https%3A%2F%2Fshare.google%2FWQj4FvOjVqKgDsG56" target="_blank" rel="noopener">Add to calendar</a>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Venues -->
+<section class="slide venues" id="venues" data-dot="#b8862b">
+  <div class="frame"></div>
+  <div class="inner">
+    <div class="eyebrow">How to reach</div>
+    <h2 style="color:var(--maroon)">Venues</h2>
+    <div class="venue-grid">
+      <div class="venue" data-only="all">
+        <span class="when">23 February 2027</span>
+        <span class="vn">Gulmohar Grand Farms &amp; Banquet</span>
+        <p class="what">Haldi (10:00 am – 2:30 pm)<br>Sangeet &amp; Engagement (from 6:30 pm)</p>
+        <a class="btn" href="https://share.google/DhckDq7Jnr9I8tWUf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Open in Google Maps</a>
+      </div>
+      <div class="venue">
+        <span class="when">24 February 2027</span>
+        <span class="vn">Sanssara Banquets</span>
+        <p class="what">Wedding ceremony</p>
+        <a class="btn" href="https://share.google/WQj4FvOjVqKgDsG56" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Open in Google Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7b. RSVP -->
+<section class="slide rsvp" id="rsvp" data-dot="#6e0f1d">
+  <div class="frame"></div>
+  <div class="inner">
+    <div class="eyebrow">Kindly respond</div>
+    <h2 style="color:var(--maroon)">RSVP</h2>
+    <p class="lede">Let us know if you can join and how many of you are coming, so we can plan seating and food.</p>
+    <div class="rsvp-card">
+      <p class="rsvp-intro">The RSVP form takes under a minute. It asks for:</p>
+      <ul class="rsvp-list">
+        <li>Your name and phone number</li>
+        <li>Whether you can join us</li>
+        <li>Number of people coming, including you</li>
+        <li data-only="all">Which functions you'll attend</li>
+      </ul>
+      <div class="actions">
+        <a class="btn solid" id="rsvp-btn" href="#rsvp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm6 1.5V8h4.5L13 3.5zM8 12v1.5h8V12H8zm0 3.5V17h8v-1.5H8zm0 3.5v1.5h5V19H8z"/></svg>Open the RSVP form</a>
+      </div>
+      <p class="rsvp-soon" id="rsvp-soon" hidden>The RSVP form will open here soon. Please check back in a few days.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Closing -->
+<section class="slide closing" id="blessings" data-dot="#6e0f1d">
+  <div class="frame"></div>
+  <div class="inner">
+    <div class="deva" style="color:var(--maroon)">आपकी उपस्थिति ही हमारा सौभाग्य है</div>
+    <div class="eyebrow">Your presence is our blessing</div>
+    <div class="round"><img src="images/host-hills.jpg" alt="Tofu smiling on a hilltop"></div>
+    <span class="n">Ravi &amp; Priyanshi</span>
+    <div class="rule"></div>
+    <div class="sign">
+      <span>With love and warm regards,</span>
+      <span><b>Smt. Kusum Gupta &amp; Shri Vinod Gupta</b></span>
+      <span><b>Smt. Usha Chaudhary &amp; Shri B.S. Chaudhari</b></span>
+      <span>and the Gupta &amp; Chaudhary families</span>
+      <span class="host-tag" style="justify-content:center;margin-top:.4rem">and Tofu, our chief host, whose blessings are with you all</span>
+    </div>
+    <div class="copy-row">
+      <button type="button" id="copy-link">Copy invitation link</button>
+      <span id="copy-msg" aria-live="polite"></span>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  // Two links: the full invitation (no hash) and the wedding-only one (#shadi)
+  var RSVP = {
+    form: "",       // Google Form for the full invitation, e.g. "https://forms.gle/..."
+    formShadi: ""   // Google Form for wedding-only guests; leave empty to use the one above
+  };
+  var MODE = location.hash === "#shadi" ? "shadi" : "all";
+  document.body.classList.add("mode-" + MODE);
+  document.querySelectorAll("[data-only]").forEach(function (n) { n.hidden = n.dataset.only !== MODE; });
+
+  // In-page links scroll without touching the address, so #shadi stays put
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || a.id === "rsvp-btn") return;
+    var t = document.getElementById(a.getAttribute("href").slice(1));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); }
+  });
+
+  // Countdown: Haldi starts 23 Feb 2027, 10:00 IST (UTC+05:30)
+  var events = MODE === "shadi" ? [
+    { t: Date.parse("2027-02-24T00:00:00+05:30"), label: "Counting down to the Wedding, Wednesday 24 February 2027." },
+    { t: Date.parse("2027-02-25T00:00:00+05:30"), label: "Today is the Wedding day!" }
+  ] : [
+    { t: Date.parse("2027-02-23T10:00:00+05:30"), label: "Counting down to the Haldi, Tuesday 23 February 2027, 10:00 am IST." },
+    { t: Date.parse("2027-02-23T18:30:00+05:30"), label: "The Haldi is under way. Next: Sangeet & Engagement at 6:30 pm." },
+    { t: Date.parse("2027-02-24T00:00:00+05:30"), label: "Sangeet & Engagement tonight. Next: the Wedding on 24 February." },
+    { t: Date.parse("2027-02-25T00:00:00+05:30"), label: "Today is the Wedding day!" }
+  ];
+  var el = { d: document.getElementById("cd-d"), h: document.getElementById("cd-h"), m: document.getElementById("cd-m"), s: document.getElementById("cd-s"), n: document.getElementById("cd-note") };
+  function pad(x) { return String(x).padStart(2, "0"); }
+  function tick() {
+    var now = Date.now();
+    var next = events.find(function (e) { return e.t > now; });
+    if (!next) { el.d.textContent = el.h.textContent = el.m.textContent = el.s.textContent = "00"; el.n.textContent = "Thank you for celebrating with us."; return; }
+    var diff = Math.max(0, next.t - now);
+    el.d.textContent = Math.floor(diff / 864e5);
+    el.h.textContent = pad(Math.floor(diff / 36e5) % 24);
+    el.m.textContent = pad(Math.floor(diff / 6e4) % 60);
+    el.s.textContent = pad(Math.floor(diff / 1e3) % 60);
+    el.n.textContent = next.label;
+  }
+  tick(); setInterval(tick, 1000);
+
+  // Petals / sparkles
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce) {
+    document.querySelectorAll(".petals").forEach(function (box) {
+      var n = +box.dataset.n || 16, sparkle = box.parentElement.classList.contains("sangeet");
+      for (var i = 0; i < n; i++) {
+        var p = document.createElement("i");
+        p.style.left = (Math.random() * 100) + "%";
+        if (sparkle) { p.style.top = (Math.random() * 100) + "%"; p.style.animationDuration = (2 + Math.random() * 3) + "s"; }
+        else { p.style.animationDuration = (9 + Math.random() * 9) + "s"; p.style.setProperty("--dx", (Math.random() * 120 - 60) + "px"); }
+        p.style.animationDelay = (-Math.random() * 12) + "s";
+        box.appendChild(p);
+      }
+    });
+  }
+
+  // Dot navigation follows the visible slide
+  var dots = Array.prototype.slice.call(document.querySelectorAll(".dots a"));
+  var nav = document.querySelector(".dots");
+  var slides = document.querySelectorAll(".slide");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          var id = "#" + en.target.id;
+          dots.forEach(function (d) { d.classList.toggle("on", d.getAttribute("href") === id); });
+          nav.style.setProperty("--dot", en.target.dataset.dot || "#b8862b");
+        }
+      });
+    }, { threshold: 0.55 });
+    slides.forEach(function (s) { io.observe(s); });
+  }
+
+  // Copy link
+  var btn = document.getElementById("copy-link"), msg = document.getElementById("copy-msg");
+  btn.addEventListener("click", function () {
+    var url = location.href.split("#")[0] + (MODE === "shadi" ? "#shadi" : "");
+    try {
+      navigator.clipboard.writeText(url).then(function () { msg.textContent = "Link copied."; },
+        function () { msg.textContent = url; });
+    } catch (e) { msg.textContent = url; }
+  });
+
+  // RSVP: opens the Google Form for this invitation
+  var rsvpUrl = MODE === "shadi" ? (RSVP.formShadi || RSVP.form) : RSVP.form;
+  var rsvpBtn = document.getElementById("rsvp-btn");
+  if (/^https:\/\//.test(rsvpUrl)) { rsvpBtn.href = rsvpUrl; }
+  else { rsvpBtn.hidden = true; document.getElementById("rsvp-soon").hidden = false; }
+})();
+</script>
+
+</body>
+</html>
