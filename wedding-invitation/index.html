@@ -19,6 +19,7 @@
   --deva: "Tiro Devanagari Hindi", "Noto Serif Devanagari", serif;
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
 body { background: var(--ivory); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
@@ -156,6 +157,29 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
 .round { width: 7.5rem; height: 7.5rem; border-radius: 50%; overflow: hidden; border: 3px solid var(--gold); }
 @media (max-width: 560px) { .duties li { grid-template-columns: 1fr; gap: .1rem; } .host-grid { text-align: center; } }
 
+/* RSVP */
+.rsvp { --bg: radial-gradient(120% 90% at 50% 0%, #fffaf0 0%, #f6ead2 70%, #efdcb8 100%); --t1:#e9a21a; --t2:#c0392b; --accent: var(--maroon); --card:#fffdf8; }
+.rsvp-card { display: grid; gap: 1rem; width: 100%; max-width: 30rem; padding: 1.4rem 1.2rem; background: var(--card); border: 1px solid var(--line); text-align: left; }
+.field { display: grid; gap: .4rem; border: 0; margin: 0; padding: 0; min-width: 0; }
+.field label, .field legend { font-family: var(--caps); letter-spacing: .12em; font-size: .76rem; color: var(--maroon); padding: 0; }
+.field input[type=text], .field textarea, .stepper input { font: inherit; font-size: 1rem; color: var(--ink); background: #fff; border: 1px solid rgba(110,15,29,.3); padding: .6rem .7rem; border-radius: 2px; width: 100%; }
+.field input:focus-visible, .field textarea:focus-visible, .stepper button:focus-visible, .pill input:focus-visible + span { outline: 2px solid var(--gold); outline-offset: 2px; }
+.choice-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+.pill { position: relative; cursor: pointer; }
+.pill input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.pill span { display: inline-block; padding: .45rem .85rem; border: 1px solid rgba(110,15,29,.35); font-size: .92rem; color: var(--maroon); background: #fff; }
+.pill input:checked + span { background: var(--maroon); color: #fff6e6; border-color: var(--maroon); }
+.stepper { display: grid; grid-template-columns: 2.8rem 5rem 2.8rem; }
+.stepper button { font: inherit; font-size: 1.3rem; border: 1px solid rgba(110,15,29,.3); background: #f6ead2; color: var(--maroon); cursor: pointer; }
+.stepper input { text-align: center; border-left: 0; border-right: 0; font-variant-numeric: tabular-nums; -moz-appearance: textfield; }
+.stepper input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.rsvp-error { margin: 0; min-height: 1.2em; color: #a3122a; font-size: .92rem; }
+.rsvp-fallback { display: grid; gap: .5rem; justify-items: start; font-size: .92rem; }
+.rsvp-fallback p { margin: 0; }
+.rsvp-fallback pre { margin: 0; width: 100%; white-space: pre-wrap; font-family: var(--body); font-size: .9rem; background: #f6ead2; padding: .7rem; border: 1px dashed var(--line); }
+.rsvp-fallback .btn { --btn-fg: var(--maroon); cursor: pointer; font-family: var(--caps); }
+body.mode-shadi .venue-grid { grid-template-columns: minmax(0, 24rem); justify-content: center; }
+
 /* dots */
 .dots { position: fixed; right: calc(env(safe-area-inset-right, 0px) + 14px); top: 50%; transform: translateY(-50%); z-index: 20; display: grid; gap: .7rem; }
 .dots a { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--dot, #b8862b); background: transparent; display: block; transition: background .2s, transform .2s; }
@@ -176,10 +200,11 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
   <a href="#host"><span>A note from Tofu</span></a>
   <a href="#invitation"><span>Invitation</span></a>
   <a href="#countdown"><span>Countdown</span></a>
-  <a href="#haldi"><span>Haldi</span></a>
-  <a href="#sangeet"><span>Sangeet &amp; Engagement</span></a>
+  <a href="#haldi" data-only="all"><span>Haldi</span></a>
+  <a href="#sangeet" data-only="all"><span>Sangeet &amp; Engagement</span></a>
   <a href="#wedding"><span>Wedding</span></a>
   <a href="#venues"><span>Venues</span></a>
+  <a href="#rsvp"><span>RSVP</span></a>
   <a href="#blessings"><span>Blessings</span></a>
 </nav>
 
@@ -197,7 +222,8 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
       <span class="n">Priyanshi</span>
     </div>
     <div class="rule"></div>
-    <div class="cover-dates">23 &amp; 24 February 2027</div>
+    <div class="cover-dates"><span data-only="all">23 &amp; 24 February 2027</span><span data-only="shadi">Wednesday, 24 February 2027</span></div>
+    <a class="btn solid" href="#rsvp" style="--accent:var(--maroon)">RSVP</a>
     <p class="lede">request the pleasure of your company as they begin their journey together.</p>
     <a class="scroll-cue" href="#invitation" style="text-decoration:none">Open the invitation<span></span></a>
   </div>
@@ -216,7 +242,7 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
       </figure>
       <div class="note">
         <p>You're invited! I'm the youngest member of this family and the chief host of this wedding. My Ravi is marrying Priyanshi, and I have been given the most important job of all: making sure <em>you</em> come.</p>
-        <p>There will be haldi, music, rings and a lot of food I'm not allowed to eat. The celebrations may be a little too loud for my ears, so I might watch from a quiet corner at home. But my blessings and my tail wags will be with every one of you.</p>
+        <p><span data-only="all">There will be haldi, music, rings and a lot of food</span><span data-only="shadi">There will be pheras, music and a lot of food</span> I'm not allowed to eat. The celebrations may be a little too loud for my ears, so I might watch from a quiet corner at home. But my blessings and my tail wags will be with every one of you.</p>
         <ul class="duties">
           <li><b>Chief well-wisher</b><span>Sending blessings to the couple</span></li>
           <li><b>Guest list approver</b><span>Every name sniffed and approved</span></li>
@@ -266,15 +292,15 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
     </div>
     <p class="lede" id="cd-note">Counting down to the Haldi, Tuesday 23 February 2027, 10:00 am IST.</p>
     <div class="timeline">
-      <a href="#haldi"><span class="d">23 Feb</span><span>Haldi · 10:00 am – 2:30 pm</span></a>
-      <a href="#sangeet"><span class="d">23 Feb</span><span>Sangeet &amp; Engagement · from 6:30 pm</span></a>
+      <a href="#haldi" data-only="all"><span class="d">23 Feb</span><span>Haldi · 10:00 am – 2:30 pm</span></a>
+      <a href="#sangeet" data-only="all"><span class="d">23 Feb</span><span>Sangeet &amp; Engagement · from 6:30 pm</span></a>
       <a href="#wedding"><span class="d">24 Feb</span><span>Wedding</span></a>
     </div>
   </div>
 </section>
 
 <!-- 4. Haldi -->
-<section class="slide haldi" id="haldi" data-dot="#9a6a00">
+<section data-only="all" class="slide haldi" id="haldi" data-dot="#9a6a00">
   <div class="petals" data-n="18"></div>
   <div class="frame"></div>
   <div class="inner">
@@ -308,7 +334,7 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
 </section>
 
 <!-- 5. Sangeet & Engagement -->
-<section class="slide sangeet" id="sangeet" data-dot="#f28ab8">
+<section data-only="all" class="slide sangeet" id="sangeet" data-dot="#f28ab8">
   <div class="petals" data-n="40"></div>
   <div class="frame"></div>
   <div class="inner">
@@ -375,7 +401,7 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
     <div class="eyebrow">How to reach</div>
     <h2 style="color:var(--maroon)">Venues</h2>
     <div class="venue-grid">
-      <div class="venue">
+      <div class="venue" data-only="all">
         <span class="when">23 February 2027</span>
         <span class="vn">Gulmohar Grand Farms &amp; Banquet</span>
         <p class="what">Haldi (10:00 am – 2:30 pm)<br>Sangeet &amp; Engagement (from 6:30 pm)</p>
@@ -390,6 +416,61 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Open in Google Maps</a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- 7b. RSVP -->
+<section class="slide rsvp" id="rsvp" data-dot="#6e0f1d">
+  <div class="frame"></div>
+  <div class="inner">
+    <div class="eyebrow">Kindly respond</div>
+    <h2 style="color:var(--maroon)">RSVP</h2>
+    <p class="lede">Let us know if you can join and how many of you are coming, so we can plan seating and food.</p>
+    <form class="rsvp-card" id="rsvp-form" novalidate>
+      <div class="field">
+        <label for="rsvp-name">Your name</label>
+        <input id="rsvp-name" type="text" autocomplete="name" placeholder="e.g. Sharma family">
+      </div>
+      <fieldset class="field">
+        <legend>Will you join us?</legend>
+        <div class="choice-row">
+          <label class="pill"><input type="radio" name="attend" id="rsvp-yes" value="yes" checked><span>Joyfully attending</span></label>
+          <label class="pill"><input type="radio" name="attend" id="rsvp-no" value="no"><span>Sorry, can't make it</span></label>
+        </div>
+      </fieldset>
+      <div class="field" id="rsvp-count-field">
+        <label for="rsvp-count">Number of people (including you)</label>
+        <div class="stepper">
+          <button type="button" id="rsvp-minus" aria-label="One fewer person">&minus;</button>
+          <input id="rsvp-count" type="number" inputmode="numeric" min="1" max="30" value="2">
+          <button type="button" id="rsvp-plus" aria-label="One more person">+</button>
+        </div>
+      </div>
+      <fieldset class="field" id="rsvp-events-field" data-only="all">
+        <legend>Functions you'll attend</legend>
+        <div class="choice-row">
+          <label class="pill"><input type="checkbox" id="rsvp-ev-haldi" value="Haldi (23 Feb)" checked><span>Haldi</span></label>
+          <label class="pill"><input type="checkbox" id="rsvp-ev-sangeet" value="Sangeet &amp; Engagement (23 Feb)" checked><span>Sangeet &amp; Engagement</span></label>
+          <label class="pill"><input type="checkbox" id="rsvp-ev-wedding" value="Wedding (24 Feb)" checked><span>Wedding</span></label>
+        </div>
+      </fieldset>
+      <div class="field">
+        <label for="rsvp-note">Message for the couple (optional)</label>
+        <textarea id="rsvp-note" rows="2" placeholder="Blessings, dietary needs, arrival time..."></textarea>
+      </div>
+      <p class="rsvp-error" id="rsvp-error" aria-live="polite"></p>
+      <div class="actions">
+        <a class="btn solid" id="rsvp-wa" href="#rsvp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.3.4c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8 1 .9 1.8 1.1 2 1.3.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.4.2.5.3.1.2.1.7-.1 1.2z"/></svg>Send RSVP on WhatsApp</a>
+        <a class="btn" id="rsvp-form-link" href="#rsvp" target="_blank" rel="noopener" hidden>Or fill the RSVP form</a>
+      </div>
+      <div class="rsvp-fallback" id="rsvp-fallback" hidden>
+        <p>Copy this message and send it to the family:</p>
+        <pre id="rsvp-preview"></pre>
+        <button type="button" class="btn" id="rsvp-copy">Copy RSVP message</button>
+        <span id="rsvp-copy-msg" aria-live="polite"></span>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -418,8 +499,28 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
 
 <script>
 (function () {
+  // Two links: the full invitation (no hash) and the wedding-only one (#shadi)
+  var RSVP = {
+    whatsapp: "",   // number with country code, digits only, e.g. "919876543210"
+    form: ""        // Google Form link, e.g. "https://forms.gle/..."
+  };
+  var MODE = location.hash === "#shadi" ? "shadi" : "all";
+  document.body.classList.add("mode-" + MODE);
+  document.querySelectorAll("[data-only]").forEach(function (n) { n.hidden = n.dataset.only !== MODE; });
+
+  // In-page links scroll without touching the address, so #shadi stays put
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || a.id === "rsvp-wa" || a.id === "rsvp-form-link") return;
+    var t = document.getElementById(a.getAttribute("href").slice(1));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); }
+  });
+
   // Countdown: Haldi starts 23 Feb 2027, 10:00 IST (UTC+05:30)
-  var events = [
+  var events = MODE === "shadi" ? [
+    { t: Date.parse("2027-02-24T00:00:00+05:30"), label: "Counting down to the Wedding, Wednesday 24 February 2027." },
+    { t: Date.parse("2027-02-25T00:00:00+05:30"), label: "Today is the Wedding day!" }
+  ] : [
     { t: Date.parse("2027-02-23T10:00:00+05:30"), label: "Counting down to the Haldi, Tuesday 23 February 2027, 10:00 am IST." },
     { t: Date.parse("2027-02-23T18:30:00+05:30"), label: "The Haldi is under way. Next: Sangeet & Engagement at 6:30 pm." },
     { t: Date.parse("2027-02-24T00:00:00+05:30"), label: "Sangeet & Engagement tonight. Next: the Wedding on 24 February." },
@@ -476,11 +577,67 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
   // Copy link
   var btn = document.getElementById("copy-link"), msg = document.getElementById("copy-msg");
   btn.addEventListener("click", function () {
-    var url = location.href.split("#")[0];
+    var url = location.href.split("#")[0] + (MODE === "shadi" ? "#shadi" : "");
     try {
       navigator.clipboard.writeText(url).then(function () { msg.textContent = "Link copied."; },
         function () { msg.textContent = url; });
     } catch (e) { msg.textContent = url; }
   });
+
+  // RSVP
+  var f = {
+    name: document.getElementById("rsvp-name"), yes: document.getElementById("rsvp-yes"),
+    count: document.getElementById("rsvp-count"), note: document.getElementById("rsvp-note"),
+    countField: document.getElementById("rsvp-count-field"), evField: document.getElementById("rsvp-events-field"),
+    err: document.getElementById("rsvp-error"), wa: document.getElementById("rsvp-wa"),
+    formLink: document.getElementById("rsvp-form-link"), fb: document.getElementById("rsvp-fallback"),
+    preview: document.getElementById("rsvp-preview")
+  };
+  var evBoxes = ["rsvp-ev-haldi", "rsvp-ev-sangeet", "rsvp-ev-wedding"].map(function (id) { return document.getElementById(id); });
+  function count() { var n = parseInt(f.count.value, 10); return isNaN(n) ? 1 : Math.min(30, Math.max(1, n)); }
+  function message() {
+    var going = f.yes.checked;
+    var lines = ["RSVP: Wedding of Ravi & Priyanshi", "Name: " + (f.name.value.trim() || "-")];
+    if (going) {
+      var evs = MODE === "shadi" ? ["Wedding (24 Feb)"] : evBoxes.filter(function (b) { return b.checked; }).map(function (b) { return b.value; });
+      lines.push("Attending: Yes", "Number of people: " + count(), "Functions: " + (evs.join(", ") || "-"));
+    } else {
+      lines.push("Attending: Sorry, can't make it");
+    }
+    if (f.note.value.trim()) lines.push("Message: " + f.note.value.trim());
+    lines.push("Invitation: " + (MODE === "shadi" ? "Wedding only" : "All functions"));
+    return lines.join("\n");
+  }
+  function refresh() {
+    var going = f.yes.checked;
+    f.countField.hidden = !going;
+    if (MODE === "all") f.evField.hidden = !going;
+    var text = message();
+    f.preview.textContent = text;
+    if (RSVP.whatsapp) f.wa.href = "https://wa.me/" + RSVP.whatsapp + "?text=" + encodeURIComponent(text);
+  }
+  if (!RSVP.whatsapp) { f.wa.hidden = true; f.fb.hidden = false; }
+  if (RSVP.form) { f.formLink.href = RSVP.form; f.formLink.hidden = false; }
+  document.getElementById("rsvp-minus").addEventListener("click", function () { f.count.value = Math.max(1, count() - 1); refresh(); });
+  document.getElementById("rsvp-plus").addEventListener("click", function () { f.count.value = Math.min(30, count() + 1); refresh(); });
+  document.getElementById("rsvp-form").addEventListener("input", refresh);
+  document.getElementById("rsvp-form").addEventListener("change", refresh);
+  document.getElementById("rsvp-form").addEventListener("submit", function (e) { e.preventDefault(); });
+  function valid() {
+    if (!f.name.value.trim()) { f.err.textContent = "Please add your name so we know who is coming."; f.name.focus(); return false; }
+    if (f.yes.checked && MODE === "all" && !evBoxes.some(function (b) { return b.checked; })) { f.err.textContent = "Pick at least one function you'll attend."; return false; }
+    f.err.textContent = ""; return true;
+  }
+  f.wa.addEventListener("click", function (e) { refresh(); if (!valid()) e.preventDefault(); });
+  document.getElementById("rsvp-copy").addEventListener("click", function () {
+    var m = document.getElementById("rsvp-copy-msg");
+    if (!valid()) return;
+    var text = message();
+    try {
+      navigator.clipboard.writeText(text).then(function () { m.textContent = "Copied. Paste it in a message to the family."; },
+        function () { m.textContent = "Select the text above and copy it."; });
+    } catch (e) { m.textContent = "Select the text above and copy it."; }
+  });
+  refresh();
 })();
 </script>
