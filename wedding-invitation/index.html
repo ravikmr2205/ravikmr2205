@@ -135,6 +135,27 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
 .copy-row button { font: inherit; font-family: var(--caps); letter-spacing: .12em; font-size: .75rem; padding: .5rem .9rem; border: 1px solid var(--gold); background: transparent; color: var(--maroon); cursor: pointer; }
 .copy-row button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
+/* Host photos */
+.arch { width: min(13rem, 56vw); aspect-ratio: 3 / 4; max-width: 100%; border-radius: 999px 999px 10px 10px; overflow: hidden; border: 3px solid var(--accent); box-shadow: 0 0 0 6px var(--bg-solid, #fffaf0), 0 0 0 7px var(--line); }
+.arch img, .snap img, .round img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.host-tag { font-family: var(--caps); letter-spacing: .18em; font-size: .75rem; color: var(--maroon); display: inline-flex; gap: .4rem; align-items: center; }
+.host-tag svg { width: 14px; height: 14px; fill: currentColor; }
+.snap { margin: 0; display: grid; gap: .5rem; justify-items: center; width: min(12rem, 52vw); padding: .55rem .55rem .7rem; background: #fffdf8; color: #3b2a1e; box-shadow: 0 10px 24px rgba(0,0,0,.22); transform: rotate(var(--tilt, -2.5deg)); }
+.snap div { width: 100%; aspect-ratio: 3 / 4; overflow: hidden; }
+.snap figcaption { font-style: italic; font-size: .88rem; line-height: 1.3; text-align: center; }
+.event-row { display: flex; flex-wrap: wrap; gap: 1.6rem; align-items: center; justify-content: center; width: 100%; }
+.haldi .inner, .sangeet .inner, .wedding .inner { max-width: 48rem; }
+.event-row .event-card { flex: 1 1 18rem; min-width: 0; }
+.host { --bg: radial-gradient(110% 90% at 50% 0%, #fff6e2 0%, #f8e3c2 70%, #f1d3a6 100%); --t1:#e9a21a; --t2:#c0392b; }
+.host-grid { display: flex; flex-wrap: wrap; gap: 1.6rem; align-items: center; justify-content: center; text-align: left; }
+.host-grid .note { flex: 1 1 18rem; min-width: 0; display: grid; gap: .8rem; }
+.host-grid .note p { margin: 0; }
+.duties { display: grid; gap: .45rem; margin: 0; padding: 0; list-style: none; }
+.duties li { display: grid; grid-template-columns: 9.5rem 1fr; gap: .6rem; padding-bottom: .4rem; border-bottom: 1px dashed var(--line); font-size: .95rem; }
+.duties b { font-family: var(--caps); letter-spacing: .1em; font-weight: 400; font-size: .78rem; color: var(--maroon); }
+.round { width: 7.5rem; height: 7.5rem; border-radius: 50%; overflow: hidden; border: 3px solid var(--gold); }
+@media (max-width: 560px) { .duties li { grid-template-columns: 1fr; gap: .1rem; } .host-grid { text-align: center; } }
+
 /* dots */
 .dots { position: fixed; right: calc(env(safe-area-inset-right, 0px) + 14px); top: 50%; transform: translateY(-50%); z-index: 20; display: grid; gap: .7rem; }
 .dots a { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--dot, #b8862b); background: transparent; display: block; transition: background .2s, transform .2s; }
@@ -152,6 +173,7 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
 
 <nav class="dots" aria-label="Sections">
   <a href="#home" class="on"><span>Home</span></a>
+  <a href="#host"><span>A note from the host</span></a>
   <a href="#invitation"><span>Invitation</span></a>
   <a href="#countdown"><span>Countdown</span></a>
   <a href="#haldi"><span>Haldi</span></a>
@@ -166,6 +188,8 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
   <div class="frame"></div>
   <div class="inner">
     <div class="ganesh">॥ श्री गणेशाय नमः ॥</div>
+    <div class="arch"><img src="images/host-hills.jpg" alt="Our golden-furred dog smiling on a misty hilltop, wearing a purple collar"></div>
+    <span class="host-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 13c-3 0-6 3.2-6 5.6C6 20.4 7.4 21 9 21c1.2 0 2-.6 3-.6s1.8.6 3 .6c1.6 0 3-.6 3-2.4C18 16.2 15 13 12 13zM5 12.5a2.2 2.8 0 1 0 0-5.6 2.2 2.8 0 0 0 0 5.6zm14 0a2.2 2.8 0 1 0 0-5.6 2.2 2.8 0 0 0 0 5.6zM9 9a2.3 3 0 1 0 0-6 2.3 3 0 0 0 0 6zm6 0a2.3 3 0 1 0 0-6 2.3 3 0 0 0 0 6z"/></svg>Your chief host invites you</span>
     <div class="eyebrow">Together with their families</div>
     <div class="names">
       <span class="n">Ravi</span>
@@ -176,6 +200,31 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
     <div class="cover-dates">23 &amp; 24 February 2027</div>
     <p class="lede">request the pleasure of your company as they begin their journey together.</p>
     <a class="scroll-cue" href="#invitation" style="text-decoration:none">Open the invitation<span></span></a>
+  </div>
+</section>
+
+<!-- 1b. A note from the host -->
+<section class="slide host" id="host" data-dot="#6e0f1d">
+  <div class="frame"></div>
+  <div class="inner" style="max-width:46rem">
+    <div class="eyebrow">A note from your host</div>
+    <h2 style="color:var(--maroon)">Woof! You're invited</h2>
+    <div class="host-grid">
+      <figure class="snap" style="--tilt:-3deg">
+        <div><img src="images/host-closeup.jpg" alt="Close-up of our dog's nose, looking straight into the camera"></div>
+        <figcaption>Checking that you've read this properly.</figcaption>
+      </figure>
+      <div class="note">
+        <p>I'm the youngest member of this family and the chief host of this wedding. My Ravi is marrying Priyanshi, and I have been given the most important job of all: making sure <em>you</em> come.</p>
+        <p>There will be haldi, music, rings and a lot of food I'm not allowed to eat. Please come. I promise extra tail wags for everyone.</p>
+        <ul class="duties">
+          <li><b>Chief greeter</b><span>Welcoming every guest at the gate</span></li>
+          <li><b>Ring security</b><span>Guarding the rings at the engagement</span></li>
+          <li><b>Dance floor inspector</b><span>Sangeet night, front row</span></li>
+          <li><b>Official sniff test</b><span>Every dish, from a safe distance</span></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -233,7 +282,12 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
     <div class="eyebrow">Ceremony one</div>
     <h2>Haldi</h2>
     <p class="lede">A morning of turmeric, laughter and blessings as we prepare the couple for the big day.</p>
-    <div class="event-card">
+    <div class="event-row">
+      <figure class="snap" style="--tilt:-3deg">
+        <div><img src="images/host-garden.jpg" alt="Our dog sitting in a sunny garden among fallen white flowers, grinning"></div>
+        <figcaption>Practising my haldi smile. Yellow suits me.</figcaption>
+      </figure>
+      <div class="event-card">
       <dl class="facts">
         <div class="fact"><dt>Date</dt><dd><strong>Tuesday, 23 February 2027</strong></dd></div>
         <div class="fact"><dt>Time</dt><dd>10:00 am to 2:30 pm</dd></div>
@@ -249,6 +303,7 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
         <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Haldi%20%E2%80%93%20Ravi%20%26%20Priyanshi&dates=20270223T043000Z/20270223T090000Z&location=Gulmohar%20Grand%20Farms%20%26%20Banquet&details=Haldi%20ceremony.%20Dress%20code%3A%20shades%20of%20yellow.%20Map%3A%20https%3A%2F%2Fshare.google%2FDhckDq7Jnr9I8tWUf" target="_blank" rel="noopener">Add to calendar</a>
       </div>
     </div>
+    </div>
   </div>
 </section>
 
@@ -262,7 +317,12 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
     <h2>Sangeet &amp; Engagement</h2>
     <div class="ring">An evening of rings, music &amp; dance</div>
     <p class="lede">Join us as the couple exchange rings, followed by a night of songs and dancing with both families.</p>
-    <div class="event-card">
+    <div class="event-row">
+      <figure class="snap" style="--tilt:2.5deg">
+        <div><img src="images/host-bunny.jpg" alt="Our dog wearing a lilac bunny-ear headband"></div>
+        <figcaption>Dressed up for the dance floor.</figcaption>
+      </figure>
+      <div class="event-card">
       <dl class="facts">
         <div class="fact"><dt>Date</dt><dd><strong>Tuesday, 23 February 2027</strong></dd></div>
         <div class="fact"><dt>Time</dt><dd>Event starts at 6:30 pm</dd></div>
@@ -273,6 +333,7 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Get directions</a>
         <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sangeet%20%26%20Engagement%20%E2%80%93%20Ravi%20%26%20Priyanshi&dates=20270223T130000Z/20270223T180000Z&location=Gulmohar%20Grand%20Farms%20%26%20Banquet&details=Sangeet%20and%20Engagement.%20Starts%206%3A30%20pm.%20Map%3A%20https%3A%2F%2Fshare.google%2FDhckDq7Jnr9I8tWUf" target="_blank" rel="noopener">Add to calendar</a>
       </div>
+    </div>
     </div>
   </div>
 </section>
@@ -286,7 +347,12 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
     <div class="eyebrow">The main ceremony</div>
     <h2>Wedding</h2>
     <p class="lede">Seven vows, one sacred fire and two families becoming one. We would be honoured to have you with us.</p>
-    <div class="event-card">
+    <div class="event-row">
+      <figure class="snap" style="--tilt:-2deg">
+        <div><img src="images/host-towel.jpg" alt="Our dog wrapped in a blue hooded towel like a veil"></div>
+        <figcaption>Ghoonghat on, ready for the pheras.</figcaption>
+      </figure>
+      <div class="event-card">
       <dl class="facts">
         <div class="fact"><dt>Date</dt><dd><strong>Wednesday, 24 February 2027</strong></dd></div>
         <div class="fact"><dt>Time</dt><dd>Timings to be shared soon</dd></div>
@@ -297,6 +363,7 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Get directions</a>
         <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding%20%E2%80%93%20Ravi%20%26%20Priyanshi&dates=20270224/20270225&location=Sanssara%20Banquets&details=Wedding%20of%20Ravi%20Gupta%20and%20Priyanshi%20Chaudhary.%20Map%3A%20https%3A%2F%2Fshare.google%2FWQj4FvOjVqKgDsG56" target="_blank" rel="noopener">Add to calendar</a>
       </div>
+    </div>
     </div>
   </div>
 </section>
@@ -332,6 +399,7 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
   <div class="inner">
     <div class="deva" style="color:var(--maroon)">आपकी उपस्थिति ही हमारा सौभाग्य है</div>
     <div class="eyebrow">Your presence is our blessing</div>
+    <div class="round"><img src="images/host-hills.jpg" alt="Our dog smiling on a hilltop"></div>
     <span class="n">Ravi &amp; Priyanshi</span>
     <div class="rule"></div>
     <div class="sign">
@@ -339,6 +407,7 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
       <span><b>Smt. Kusum Gupta &amp; Shri Vinod Gupta</b></span>
       <span><b>Smt. Usha Chaudhary &amp; Shri B.S. Chaudhari</b></span>
       <span>and the Gupta &amp; Chaudhary families</span>
+      <span class="host-tag" style="justify-content:center;margin-top:.4rem">and your chief host, who will be waiting at the gate</span>
     </div>
     <div class="copy-row">
       <button type="button" id="copy-link">Copy invitation link</button>
