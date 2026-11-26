@@ -141,6 +141,7 @@ h2 { font-size: clamp(2.4rem, 8vw, 4rem); }
 .venue .btn { justify-self: start; margin-top: .3rem; --btn-fg: var(--maroon); }
 .closing { --bg: radial-gradient(120% 90% at 50% 100%, #efdcb8 0%, #f6ead2 45%, #fffaf0 100%); --t1:#e9a21a; --t2:#c0392b; }
 .closing .n { font-family: var(--display); color: var(--maroon); font-size: clamp(2.4rem, 10vw, 4rem); line-height: 1; }
+body.side-bride .fam.bride, body.side-bride .hostline.bride { order: -1; }
 .closing .sign { display: grid; gap: .2rem; font-size: .98rem; color: #5b4636; }
 .copy-row { display: flex; gap: .5rem; align-items: center; justify-content: center; flex-wrap: wrap; font-size: .9rem; }
 .copy-row button { font: inherit; font-family: var(--caps); letter-spacing: .12em; font-size: .75rem; padding: .5rem .9rem; border: 1px solid var(--gold); background: transparent; color: var(--maroon); cursor: pointer; }
@@ -191,7 +192,7 @@ html.gate-on, html.gate-on body { overflow: hidden; }
 .gate-stage { display: grid; justify-items: center; gap: 1.1rem; width: min(24rem, 100%); text-align: center; }
 .gate .eyebrow { color: #e7c97a; }
 .temple { position: relative; width: min(15rem, 62vw); aspect-ratio: 3 / 4; margin-top: 6.8rem; }
-.temple .g { position: absolute; left: 50%; top: -6.6rem; width: 5.6rem; height: auto; height: auto; transform: translateX(-50%); z-index: 3; filter: drop-shadow(0 0 10px rgba(255, 200, 90, 0)); transition: filter 1s; }
+.temple .g { position: absolute; left: 50%; top: -7.4rem; width: 5.6rem; height: auto; height: auto; transform: translateX(-50%); z-index: 3; filter: drop-shadow(0 0 10px rgba(255, 200, 90, 0)); transition: filter 1s; }
 .gate.lit .temple .g { filter: drop-shadow(0 0 14px rgba(255, 200, 90, .8)); }
 .arch-stone { position: absolute; inset: 0; padding: 12px 12px 0; border-radius: 999px 999px 0 0; background: linear-gradient(#c9a27a, #8e6745); border: 3px solid #e7c97a; box-shadow: inset 0 0 0 5px rgba(0,0,0,.12); }
 .doorway { position: relative; height: 100%; overflow: hidden; border-radius: 999px 999px 0 0; perspective: 900px;
@@ -204,7 +205,7 @@ html.gate-on, html.gate-on body { overflow: hidden; }
 .door.l::after { right: 8px; } .door.r::after { left: 8px; }
 .gate.open .door.l { transform: rotateY(-108deg); }
 .gate.open .door.r { transform: rotateY(108deg); }
-.diyas { display: flex; flex-wrap: wrap; justify-content: center; gap: .55rem; }
+.diyas { margin-top: 1.2rem; display: flex; flex-wrap: wrap; justify-content: center; gap: .55rem; }
 .diya { position: relative; width: 2.4rem; height: 2.4rem; }
 .diya::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 52%; border-radius: 4px 4px 50% 50% / 4px 4px 100% 100%; background: linear-gradient(#d0702f, #7d3412); box-shadow: inset 0 3px 0 #e89a5a; }
 .flame { position: absolute; left: 50%; bottom: 46%; width: 12px; height: 22px; border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
@@ -271,6 +272,30 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
 .burst i { position: absolute; top: -24px; width: 12px; height: 16px; border-radius: 60% 0 60% 0; opacity: .9; animation: fall linear forwards; }
 @media (prefers-reduced-motion: reduce) { html.anim .slide .inner > * { opacity: 1; transform: none; filter: none; } .names .n { color: var(--maroon); background: none; } }
 
+/* Gate: carved sandstone, teak doors, brass fittings */
+.temple { width: min(14.5rem, 58vw); }
+.pillar { position: absolute; bottom: 0; width: 13%; height: 96%; z-index: 1; border-radius: 2px;
+  background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Cfilter id=%22s%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 seed=%223%22/%3E%3CfeColorMatrix values=%220 0 0 0 0.35  0 0 0 0 0.24  0 0 0 0 0.14  0 0 0 0.55 0%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url%28%23s%29%22/%3E%3C/svg%3E"), repeating-linear-gradient(90deg, rgba(0,0,0,.18) 0 2px, rgba(255,240,210,.12) 2px 5px, transparent 5px 9px), linear-gradient(90deg, #8f6a45, #d8b88a 45%, #a07a52); background-size: 200px 200px, auto, auto; box-shadow: inset 0 0 0 1px rgba(60,30,10,.4), 0 10px 24px rgba(0,0,0,.5); }
+.pillar.l { left: -17%; } .pillar.r { right: -17%; }
+.pillar::before, .pillar::after { content: ""; position: absolute; left: -22%; right: -22%; height: 7%; border-radius: 2px; background: linear-gradient(#e4c89c, #9c754d); box-shadow: 0 2px 4px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,250,230,.5); }
+.pillar::before { top: -2%; } .pillar::after { bottom: 0; }
+.arch-stone { z-index: 1; padding: 16px 16px 0; border: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Cfilter id=%22s%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 seed=%223%22/%3E%3CfeColorMatrix values=%220 0 0 0 0.35  0 0 0 0 0.24  0 0 0 0 0.14  0 0 0 0.55 0%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url%28%23s%29%22/%3E%3C/svg%3E"), radial-gradient(120% 80% at 50% 0%, #e8cfa4 0%, #c49c6c 45%, #8e6745 100%); background-size: 200px 200px, auto;
+  box-shadow: inset 0 0 0 2px #f2dcb0, inset 0 0 0 5px rgba(90,50,20,.35), inset 0 0 0 7px rgba(242,220,176,.55), inset 0 -12px 24px rgba(0,0,0,.25), 0 18px 40px rgba(0,0,0,.6), 0 0 0 1px #5a3a1a; }
+.doorway { box-shadow: inset 0 0 0 3px #3a1d0b, inset 0 10px 18px rgba(0,0,0,.55); background: radial-gradient(circle at 50% 62%, #fff8dc 0%, #ffd36b 30%, #e0801f 70%, #7a3410 100%); }
+.door { background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22240%22 height=%22480%22%3E%3Cfilter id=%22w%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.015 0.42%22 numOctaves=%223%22 seed=%227%22/%3E%3CfeColorMatrix values=%220 0 0 0 0.18  0 0 0 0 0.08  0 0 0 0 0.02  0 0 0 -1.1 1.05%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url%28%23w%29%22/%3E%3C/svg%3E"), linear-gradient(90deg, #3e1d0b 0%, #6b3818 18%, #7a4420 50%, #5d2f13 82%, #3e1d0b 100%); background-size: 240px 480px, auto; box-shadow: inset 0 0 0 2px rgba(0,0,0,.35), inset 0 0 30px rgba(0,0,0,.35); }
+.gate.lit .door { filter: brightness(1.12) saturate(1.05); }
+.door::before { inset: 0 auto 0 0; width: 14px; left: 4px; background: radial-gradient(circle at 40% 35%, #fff4c9 0 1px, #d9ab4a 1.8px, #7a5216 3.2px, transparent 3.9px) 0 6px / 14px 18px repeat-y; opacity: 1; }
+.door.r::before { left: auto; right: 4px; }
+.door::after { top: 50%; width: 18px; height: 18px; border: 0; border-radius: 50%; background: radial-gradient(circle, transparent 0 5px, #8a5f17 5.5px, #f3d48a 7px, #b8862b 8.5px, transparent 9px); filter: drop-shadow(0 2px 2px rgba(0,0,0,.6)); }
+.door.l::after { right: 6px; } .door.r::after { left: 6px; }
+.door .pn { position: absolute; left: 22%; right: 14%; height: 21%; border-radius: 3px; background: rgba(0,0,0,.14);
+  box-shadow: inset 2px 2px 0 rgba(255,220,170,.12), inset -2px -2px 0 rgba(0,0,0,.4), 0 0 0 3px rgba(40,18,6,.55), 0 0 0 4px rgba(231,201,122,.55); }
+.door.r .pn { left: 14%; right: 22%; }
+.door .pn:nth-child(1) { top: 16%; } .door .pn:nth-child(2) { top: 44%; } .door .pn:nth-child(3) { top: 72%; }
+.door .pn::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; translate: -50% -50%; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff4c9 0 1px, #d9ab4a 2px, #7a5216 4px, transparent 5px); }
+.steps { position: absolute; left: -24%; right: -24%; bottom: -16px; height: 16px; z-index: 0; background: linear-gradient(#cfae80 0 50%, #a7845c 50% 100%); clip-path: polygon(6% 0, 94% 0, 100% 50%, 100% 100%, 0 100%, 0 50%); box-shadow: 0 8px 18px rgba(0,0,0,.5); }
+
 /* dots */
 .dots { position: fixed; right: calc(env(safe-area-inset-right, 0px) + 14px); top: 50%; transform: translateY(-50%); z-index: 20; display: grid; gap: .7rem; }
 .dots a { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--dot, #b8862b); background: transparent; display: block; transition: background .2s, transform .2s; }
@@ -295,7 +320,9 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
     <div class="temple">
       <img class="g" src="images/ganesh-gold.png" alt="Ganesh ji">
       <svg class="toran" viewBox="0 0 240 100" aria-hidden="true"><path d="M10 4 V70" stroke="#e7c97a" stroke-width="1.2"/><path d="M3 84 Q3 70 10 70 Q17 70 17 84 Z" fill="#d4a640" stroke="#8a5f17" stroke-width="1"/><circle cx="10" cy="86" r="2.6" fill="#8a5f17"/><path d="M230 4 V70" stroke="#e7c97a" stroke-width="1.2"/><path d="M223 84 Q223 70 230 70 Q237 70 237 84 Z" fill="#d4a640" stroke="#8a5f17" stroke-width="1"/><circle cx="230" cy="86" r="2.6" fill="#8a5f17"/><circle cx="8.0" cy="10.0" r="7" fill="#f39c12"/><circle cx="8.0" cy="10.0" r="3" fill="#e67e22"/><circle cx="20.4" cy="19.7" r="7" fill="#f1c40f"/><circle cx="20.4" cy="19.7" r="3" fill="#e67e22"/><path d="M20.4 25.7 q-5 9 0 16 q5 -7 0 -16z" fill="#3f7a3a"/><circle cx="32.9" cy="28.2" r="7" fill="#f39c12"/><circle cx="32.9" cy="28.2" r="3" fill="#e67e22"/><circle cx="45.3" cy="35.6" r="7" fill="#f1c40f"/><circle cx="45.3" cy="35.6" r="3" fill="#e67e22"/><circle cx="57.8" cy="41.8" r="7" fill="#f39c12"/><circle cx="57.8" cy="41.8" r="3" fill="#e67e22"/><path d="M57.8 47.8 q-5 9 0 16 q5 -7 0 -16z" fill="#3f7a3a"/><circle cx="70.2" cy="46.9" r="7" fill="#f1c40f"/><circle cx="70.2" cy="46.9" r="3" fill="#e67e22"/><circle cx="82.7" cy="50.9" r="7" fill="#f39c12"/><circle cx="82.7" cy="50.9" r="3" fill="#e67e22"/><circle cx="95.1" cy="53.7" r="7" fill="#f1c40f"/><circle cx="95.1" cy="53.7" r="3" fill="#e67e22"/><path d="M95.1 59.7 q-5 9 0 16 q5 -7 0 -16z" fill="#3f7a3a"/><circle cx="107.6" cy="55.4" r="7" fill="#f39c12"/><circle cx="107.6" cy="55.4" r="3" fill="#e67e22"/><circle cx="120.0" cy="56.0" r="7" fill="#f1c40f"/><circle cx="120.0" cy="56.0" r="3" fill="#e67e22"/><circle cx="132.4" cy="55.4" r="7" fill="#f39c12"/><circle cx="132.4" cy="55.4" r="3" fill="#e67e22"/><path d="M132.4 61.4 q-5 9 0 16 q5 -7 0 -16z" fill="#3f7a3a"/><circle cx="144.9" cy="53.7" r="7" fill="#f1c40f"/><circle cx="144.9" cy="53.7" r="3" fill="#e67e22"/><circle cx="157.3" cy="50.9" r="7" fill="#f39c12"/><circle cx="157.3" cy="50.9" r="3" fill="#e67e22"/><circle cx="169.8" cy="46.9" r="7" fill="#f1c40f"/><circle cx="169.8" cy="46.9" r="3" fill="#e67e22"/><path d="M169.8 52.9 q-5 9 0 16 q5 -7 0 -16z" fill="#3f7a3a"/><circle cx="182.2" cy="41.8" r="7" fill="#f39c12"/><circle cx="182.2" cy="41.8" r="3" fill="#e67e22"/><circle cx="194.7" cy="35.6" r="7" fill="#f1c40f"/><circle cx="194.7" cy="35.6" r="3" fill="#e67e22"/><circle cx="207.1" cy="28.2" r="7" fill="#f39c12"/><circle cx="207.1" cy="28.2" r="3" fill="#e67e22"/><path d="M207.1 34.2 q-5 9 0 16 q5 -7 0 -16z" fill="#3f7a3a"/><circle cx="219.6" cy="19.7" r="7" fill="#f1c40f"/><circle cx="219.6" cy="19.7" r="3" fill="#e67e22"/><circle cx="232.0" cy="10.0" r="7" fill="#f39c12"/><circle cx="232.0" cy="10.0" r="3" fill="#e67e22"/></svg>
-      <div class="arch-stone"><div class="doorway"><div class="door l"></div><div class="door r"></div></div></div>
+      <div class="pillar l"></div><div class="pillar r"></div>
+      <div class="arch-stone"><div class="doorway"><div class="door l"><i class="pn"></i><i class="pn"></i><i class="pn"></i></div><div class="door r"><i class="pn"></i><i class="pn"></i><i class="pn"></i></div></div></div>
+      <div class="steps"></div>
     </div>
     <div class="diyas" aria-hidden="true">
       <span class="diya"><span class="flame" style="--i:0"></span></span><span class="diya"><span class="flame" style="--i:1"></span></span><span class="diya"><span class="flame" style="--i:2"></span></span><span class="diya"><span class="flame" style="--i:3"></span></span><span class="diya"><span class="flame" style="--i:4"></span></span><span class="diya"><span class="flame" style="--i:5"></span></span><span class="diya"><span class="flame" style="--i:6"></span></span>
@@ -332,10 +359,15 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
     <div class="ganesh">॥ श्री गणेशाय नमः ॥</div>
     <div class="portrait"><svg class="halo" aria-hidden="true"><use href="#mandala"/></svg><div class="arch couple"><img src="images/couple-waist.jpg" alt="Illustration of Ravi in a red kurta and Priyanshi in a white and yellow floral suit"></div></div>
     <div class="eyebrow">Together with their families</div>
-    <div class="names">
+    <div class="names" data-side="groom">
       <span class="n">Ravi</span>
       <span class="amp">&amp;</span>
       <span class="n">Priyanshi</span>
+    </div>
+    <div class="names" data-side="bride">
+      <span class="n">Priyanshi</span>
+      <span class="amp">&amp;</span>
+      <span class="n">Ravi</span>
     </div>
     <svg class="divider" viewBox="0 0 220 28" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round">
 <path d="M6 14 H78" stroke-width="1"/><path d="M142 14 H214" stroke-width="1"/>
@@ -344,7 +376,8 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
 <path d="M110 25 C98 24 94 16 96 10 M110 25 C122 24 126 16 124 10" stroke-width="1.1"/></g>
 <g fill="currentColor"><circle cx="4" cy="14" r="1.8"/><circle cx="216" cy="14" r="1.8"/><circle cx="110" cy="14" r="1.6"/></g></svg>
     <a class="btn solid" href="#rsvp" style="--accent:var(--maroon)">RSVP</a>
-    <p class="lede">request the pleasure of your company as they begin their journey together.</p>
+    <p class="lede" data-side="groom"><b>Smt. Kusum Gupta &amp; Shri Vinod Gupta</b> request the pleasure of your company at the wedding of their son.</p>
+    <p class="lede" data-side="bride"><b>Smt. Usha Chaudhary &amp; Shri B.S. Chaudhary</b> request the pleasure of your company at the wedding of their daughter.</p>
     <a class="scroll-cue" href="#invitation" style="text-decoration:none">Open the invitation<span></span></a>
   </div>
 </section>
@@ -357,12 +390,12 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
     <div class="eyebrow">With the blessings of our elders</div>
     <p class="lede">We joyfully invite you and your family to celebrate the wedding of</p>
     <div class="families">
-      <div class="fam">
+      <div class="fam groom">
         <span class="who">The Groom</span>
         <span class="nm">Ravi Gupta</span>
         <span class="rel">son of<br><b>Smt. Kusum Gupta</b> &amp; <b>Shri Vinod Gupta</b></span>
       </div>
-      <div class="fam">
+      <div class="fam bride">
         <span class="who">The Bride</span>
         <span class="nm">Priyanshi Chaudhary</span>
         <span class="rel">daughter of<br><b>Smt. Usha Chaudhary</b> &amp; <b>Shri B.S. Chaudhary</b></span>
@@ -404,7 +437,8 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
     <div class="timeline">
       <a href="#haldi" data-only="all"><span class="d">23 Feb</span><span>Haldi · 10:00 am – 2:30 pm</span></a>
       <a href="#sangeet" data-only="all"><span class="d">23 Feb</span><span>Sangeet &amp; Engagement · from 6:30 pm</span></a>
-      <a href="#wedding"><span class="d">24 Feb</span><span>Wedding · from 7:30 pm</span></a>
+      <a href="#wedding" data-side="bride"><span class="d">24 Feb</span><span>Wedding · from 7:30 pm</span></a>
+      <a href="#wedding" data-side="groom"><span class="d">24 Feb</span><span>Baraat · 8:00 pm, at venue 9:00 pm</span></a>
     </div>
     </div>
   </div>
@@ -481,13 +515,16 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
       <div class="event-card">
       <dl class="facts">
         <div class="fact"><dt>Date</dt><dd><strong>Wednesday, 24 February 2027</strong></dd></div>
-        <div class="fact"><dt>Time</dt><dd>7:30 pm onwards</dd></div>
-        <div class="fact"><dt>Venue</dt><dd>Sanssara Banquets<br><small>Vasundhara, Ghaziabad</small></dd></div>
+        <div class="fact" data-side="bride"><dt>Time</dt><dd>7:30 pm onwards</dd></div>
+        <div class="fact" data-side="groom"><dt>Baraat</dt><dd>Departs at 8:00 pm</dd></div>
+        <div class="fact" data-side="groom"><dt>Arrival</dt><dd>Baraat reaches the venue at 9:00 pm</dd></div>
+        <div class="fact"><dt>Venue</dt><dd>Jalsa Hall, Sanssara Banquets<br><small>Vasundhara, Ghaziabad</small></dd></div>
       </dl>
       <div class="actions">
         <a class="btn solid" href="https://share.google/WQj4FvOjVqKgDsG56" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Get directions</a>
-        <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding%20%E2%80%93%20Ravi%20%26%20Priyanshi&dates=20270224T140000Z/20270224T190000Z&location=Sanssara%20Banquets%2C%20Vasundhara%2C%20Ghaziabad&details=Wedding%20of%20Ravi%20Gupta%20and%20Priyanshi%20Chaudhary.%20Map%3A%20https%3A%2F%2Fshare.google%2FWQj4FvOjVqKgDsG56" target="_blank" rel="noopener">Add to calendar</a>
+        <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding%20%E2%80%93%20Ravi%20%26%20Priyanshi&dates=20270224T140000Z/20270224T190000Z&location=Jalsa%20Hall%2C%20Sanssara%20Banquets%2C%20Vasundhara%2C%20Ghaziabad&details=Wedding%20of%20Ravi%20Gupta%20and%20Priyanshi%20Chaudhary.%20Map%3A%20https%3A%2F%2Fshare.google%2FWQj4FvOjVqKgDsG56" data-side="bride" target="_blank" rel="noopener">Add to calendar</a>
+        <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding%20%E2%80%93%20Ravi%20%26%20Priyanshi&dates=20270224T143000Z/20270224T190000Z&location=Jalsa%20Hall%2C%20Sanssara%20Banquets%2C%20Vasundhara%2C%20Ghaziabad&details=Wedding%20of%20Ravi%20Gupta%20and%20Priyanshi%20Chaudhary.%20Map%3A%20https%3A%2F%2Fshare.google%2FWQj4FvOjVqKgDsG56%20Baraat%20departs%208%3A00%20pm%2C%20reaches%20the%20venue%209%3A00%20pm." data-side="groom" target="_blank" rel="noopener">Add to calendar</a>
       </div>
     </div>
     </div>
@@ -512,8 +549,10 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
       <div class="venue">
         <span class="when">24 February 2027</span>
         <span class="vn">Sanssara Banquets</span>
+        <span class="addr">Jalsa Hall</span>
         <span class="addr">Vasundhara, Ghaziabad</span>
-        <p class="what">Wedding (7:30 pm onwards)</p>
+        <p class="what" data-side="bride">Wedding (7:30 pm onwards)</p>
+        <p class="what" data-side="groom">Baraat reaches at 9:00 pm</p>
         <a class="btn" href="https://share.google/WQj4FvOjVqKgDsG56" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Open in Google Maps</a>
       </div>
@@ -553,7 +592,8 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
     <div class="deva" style="color:var(--maroon)">आपकी उपस्थिति ही हमारा सौभाग्य है</div>
     <div class="eyebrow">Your presence is our blessing</div>
     <img class="ganesh-art small" src="images/ganesh-gold.png" alt="Ganesh ji">
-    <span class="n">Ravi &amp; Priyanshi</span>
+    <span class="n" data-side="groom">Ravi &amp; Priyanshi</span>
+    <span class="n" data-side="bride">Priyanshi &amp; Ravi</span>
     <svg class="divider" viewBox="0 0 220 28" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round">
 <path d="M6 14 H78" stroke-width="1"/><path d="M142 14 H214" stroke-width="1"/>
 <path d="M80 14 q8 -8 16 0 q-8 8 -16 0z M124 14 q8 -8 16 0 q-8 8 -16 0z" stroke-width="1"/>
@@ -561,10 +601,11 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
 <path d="M110 25 C98 24 94 16 96 10 M110 25 C122 24 126 16 124 10" stroke-width="1.1"/></g>
 <g fill="currentColor"><circle cx="4" cy="14" r="1.8"/><circle cx="216" cy="14" r="1.8"/><circle cx="110" cy="14" r="1.6"/></g></svg>
     <div class="sign">
-      <span>With love and warm regards,</span>
-      <span><b>Smt. Kusum Gupta &amp; Shri Vinod Gupta</b></span>
-      <span><b>Smt. Usha Chaudhary &amp; Shri B.S. Chaudhary</b></span>
-      <span>and the Gupta &amp; Chaudhary families</span>
+      <span style="order:-2">With love and warm regards,</span>
+      <span class="hostline groom"><b>Smt. Kusum Gupta &amp; Shri Vinod Gupta</b></span>
+      <span class="hostline bride"><b>Smt. Usha Chaudhary &amp; Shri B.S. Chaudhary</b></span>
+      <span class="hostline fams" data-side="groom">and the Gupta &amp; Chaudhary families</span>
+      <span class="hostline fams" data-side="bride">and the Chaudhary &amp; Gupta families</span>
     </div>
     <p class="music-credit" hidden></p>
     <div class="copy-row">
@@ -581,9 +622,14 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
     form: "",       // Google Form for the full invitation, e.g. "https://forms.gle/..."
     formShadi: ""   // Google Form for wedding-only guests; leave empty to use the one above
   };
-  var MODE = location.hash === "#shadi" ? "shadi" : "all";
-  document.body.classList.add("mode-" + MODE);
+  // Four links: #groom, #groom-shadi, #bride, #bride-shadi (no hash = groom, all functions; #shadi = groom, wedding only)
+  var HASH = location.hash.replace("#", "");
+  var SIDE = /^bride/.test(HASH) ? "bride" : "groom";
+  var MODE = /shadi$/.test(HASH) ? "shadi" : "all";
+  document.body.classList.add("mode-" + MODE, "side-" + SIDE);
   document.querySelectorAll("[data-only]").forEach(function (n) { n.hidden = n.dataset.only !== MODE; });
+  document.querySelectorAll("[data-side]").forEach(function (n) { if (n.dataset.side !== SIDE) n.hidden = true; });
+  document.title = SIDE === "bride" ? "Priyanshi & Ravi Shubh Vivah" : "Ravi & Priyanshi Shubh Vivah";
 
   // In-page links scroll without touching the address, so #shadi stays put
   document.addEventListener("click", function (e) {
@@ -727,13 +773,15 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
   }
 
   // Countdown: Haldi starts 23 Feb 2027, 10:00 IST (UTC+05:30)
+  var wedT = SIDE === "groom" ? "2027-02-24T20:00:00+05:30" : "2027-02-24T19:30:00+05:30";
+  var wedL = SIDE === "groom" ? "the Baraat, Wednesday 24 February 2027, 8:00 pm IST" : "the Wedding, Wednesday 24 February 2027, 7:30 pm IST";
   var events = MODE === "shadi" ? [
-    { t: Date.parse("2027-02-24T19:30:00+05:30"), label: "Counting down to the Wedding, Wednesday 24 February 2027, 7:30 pm IST." },
+    { t: Date.parse(wedT), label: "Counting down to " + wedL + "." },
     { t: Date.parse("2027-02-25T03:00:00+05:30"), label: "The wedding celebrations are under way!" }
   ] : [
     { t: Date.parse("2027-02-23T10:00:00+05:30"), label: "Counting down to the Haldi, Tuesday 23 February 2027, 10:00 am IST." },
     { t: Date.parse("2027-02-23T18:30:00+05:30"), label: "The Haldi is under way. Next: Sangeet & Engagement at 6:30 pm." },
-    { t: Date.parse("2027-02-24T19:30:00+05:30"), label: "Next: the Wedding, Wednesday 24 February, 7:30 pm IST." },
+    { t: Date.parse(wedT), label: "Next: " + wedL + "." },
     { t: Date.parse("2027-02-25T03:00:00+05:30"), label: "The wedding celebrations are under way!" }
   ];
   var el = { d: document.getElementById("cd-d"), h: document.getElementById("cd-h"), m: document.getElementById("cd-m"), s: document.getElementById("cd-s"), n: document.getElementById("cd-note") };
@@ -787,7 +835,7 @@ html.anim .slide.in .inner > * { opacity: 1; transform: none; filter: none; }
   // Copy link
   var btn = document.getElementById("copy-link"), msg = document.getElementById("copy-msg");
   btn.addEventListener("click", function () {
-    var url = location.href.split("#")[0] + (MODE === "shadi" ? "#shadi" : "");
+    var url = location.href.split("#")[0] + "#" + SIDE + (MODE === "shadi" ? "-shadi" : "");
     try {
       navigator.clipboard.writeText(url).then(function () { msg.textContent = "Link copied."; },
         function () { msg.textContent = url; });
