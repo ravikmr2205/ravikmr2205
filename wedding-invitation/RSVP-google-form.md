@@ -8,12 +8,10 @@ Each invitation link opens its own form, so the replies already tell you which i
 
 | Invitation link | Form in Google Drive |
 |---|---|
-| `pyaarkapr.github.io/groom/` | RSVP · Ravi & Priyanshi · #pyaarkaPR *(your original groom form; rename it "… · Shaadi + Engagement · #pyaarkaPR")* |
-| `pyaarkapr.github.io/groom-shaadi/` | RSVP · Ravi & Priyanshi · Shaadi only · #pyaarkaPR *(copy)* |
-| `pyaarkapr.github.io/bride/` | RSVP · Priyanshi & Ravi · #pyaarkaPR *(your original bride form; rename it "… · Shaadi + Engagement · #pyaarkaPR")* |
-| `pyaarkapr.github.io/bride-shaadi/` | RSVP · Priyanshi & Ravi · Shaadi only · #pyaarkaPR *(copy)* |
-
-The two "Shaadi only" forms are copies of your originals, made in your Drive.
+| `pyaarkapr.github.io/groom/` | RSVP – Groom – Shaadi + Engagement |
+| `pyaarkapr.github.io/groom-shaadi/` | RSVP – Groom – Shaadi only |
+| `pyaarkapr.github.io/bride/` | RSVP – Bride – Shaadi + Engagement |
+| `pyaarkapr.github.io/bride-shaadi/` | RSVP – Bride – Shaadi only |
 
 ## 2. Questions (same in all four forms)
 
