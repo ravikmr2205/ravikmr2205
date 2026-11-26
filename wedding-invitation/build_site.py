@@ -9,14 +9,15 @@ import pathlib, shutil
 src = pathlib.Path(__file__).parent
 out = src.parent / "docs"
 out.mkdir(exist_ok=True)
-page = (src / "index.html").read_text(encoding="utf-8")
-cut = page.index("<style>")
-meta, body = page[:cut], page[cut:]  # title, meta and font links go in <head>
-head = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
-        '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
-        '<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>\n'
-        + meta + '</head>\n<body>\n')
-(out / "index.html").write_text(head + body + "\n</body>\n</html>\n", encoding="utf-8")
+for name in ("index.html", "classic.html"):
+    page = (src / name).read_text(encoding="utf-8")
+    cut = page.index("<style>")
+    meta, body = page[:cut], page[cut:]  # title, meta and font links go in <head>
+    head = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+            '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+            '<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>\n'
+            + meta + '</head>\n<body>\n')
+    (out / name).write_text(head + body + "\n</body>\n</html>\n", encoding="utf-8")
 shutil.copytree(src / "images", out / "images", dirs_exist_ok=True)
 (out / ".nojekyll").write_text("")
-print("Built", out / "index.html")
+print("Built", out / "index.html", "and", out / "classic.html")
